@@ -1,0 +1,61 @@
+html, body {
+  font-size: 10px;
+  background: #1E1E1E;
+  
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: 700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1080px) {
+  html, body {
+    font-size: 10px;
+  }
+} 
+
+@media (max-width: 1080px) {
+  html, body {
+    font-size: 7px;
+  }
+} 
+
+
+@media (max-width: 500px) {
+  html, body {
+    font-size: 5px;
+  }
+}
+
+/* ROOT */
+#root {
+  display: flex; 
+  justify-content: center;
+
+  height: max-content;
+}
+
+/* APP -> App.js*/ 
+.App {
+  display: flex;
+  
+  
+  
+  
+}
+
+h1 {
+  font-size: 3rem;
+  color: #ffffff;
+  
+}
+
+
+a {
+  font-size: 3rem;
+  color: #ffffff;
+}

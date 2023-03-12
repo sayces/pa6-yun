@@ -1,0 +1,33 @@
+.layout-grid {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(3,28rem);
+  gap: 4rem;
+  height: 100rem;
+  width: auto;
+  
+}
+
+.main {
+  position: relative;
+  width: 28rem;
+  grid-column: 2;
+}
+
+/* .outlet {
+  
+} */
+
+/* .columns {
+  
+} */
+
+a {
+  text-decoration: none;
+}
+
+.layout-grid header {
+  margin: 8rem 0 0 8rem;
+  grid-column: 1;
+}
+
