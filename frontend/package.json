@@ -11,6 +11,7 @@
     "composer": "^4.1.0",
     "context": "^3.0.5",
     "cors": "^2.8.5",
+    "jwt-decode": "^3.1.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "mobx": "^6.8.0",

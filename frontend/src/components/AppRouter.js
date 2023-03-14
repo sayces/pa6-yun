@@ -4,7 +4,6 @@ import {
   Route, 
   Routes, 
   // redirect
-  useLocation
 } from 'react-router-dom'
 // import {CALENDAR_ROUTE} from '../utils/consts'
 import {Context} from '../index';

@@ -10,8 +10,13 @@ const NavBar = observer(() => {
   
   const {user} = useContext(Context)
   const history = useNavigate();
-  history = {PROFILE_ROUTE}
+  
+const submitHandler = (e) => {
+  e.preventDefault()
+  
+}
 
+  
   return (
     
     <div className='header-box__main header-box'>
@@ -20,12 +25,12 @@ const NavBar = observer(() => {
     {user.isAuth
     ? 
     <div>
-    { user.users.map(i => 
-      <div className='header-box'>
-        <Link to={history.} className='header__link header-link__auth'>Профиль</Link>
-        <Link to={'/'} className='header__link header-link__auth'>Выход</Link>
+    
+      <div  className='header-box'>
+        <Link to={() => {history(PROFILE_ROUTE + "/" + user.id.toString())}} className='header__link header-link__auth'>Профиль</Link>
+        <Link to={CALENDAR_ROUTE} onClick={submitHandler} className='header__link header-link__auth'>Выход</Link>
       </div>
-    )}   
+     
     </div>
     
       :
