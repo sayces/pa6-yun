@@ -4,6 +4,7 @@ import {
   Route, 
   Routes, 
   // redirect
+  useLocation
 } from 'react-router-dom'
 // import {CALENDAR_ROUTE} from '../utils/consts'
 import {Context} from '../index';
@@ -12,13 +13,16 @@ import {authRoutes, publicRoutes} from '../routes'
 
 const  AppRouter = observer(() => {
   
+  
+
   const {user} = useContext(Context)
   console.log(user)
+  let isLogin = user.isAuth
 
   return (
     
     <Routes>
-        {user.isAuth === true && authRoutes.map(({path, Element}) =>
+        {isLogin && authRoutes.map(({path, Element}) =>
           <Route key={path} path={path} element={<Element/>} exect/>
         )}
         {publicRoutes.map(({path, Element}) =>

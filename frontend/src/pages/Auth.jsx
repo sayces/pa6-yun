@@ -4,6 +4,7 @@ import {Link, useLocation, } from 'react-router-dom'
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from '../utils/consts';
 import 'react-bootstrap'
 import '../store/RoleStore'
+import '../store/UserStore'
 import {Context} from '../index';
 import {observer} from 'mobx-react-lite';
 
@@ -14,7 +15,7 @@ const Auth = observer(() => {
 const location = useLocation()
 const {user} = useContext(Context);
 const {role} = useContext(Context);
-const isLogin = location.pathname === LOGIN_ROUTE
+let isLogin = location.pathname === LOGIN_ROUTE
 
   return (
     <div className='page page__auth'>
@@ -38,8 +39,17 @@ const isLogin = location.pathname === LOGIN_ROUTE
           <label >роль:</label>
           
           <div className='form__auth__radio'>
-            <button onClick={() => role.setSelectedRole(role.id)} key={role.id} className='btn-1'>клиент</button>
-            <button onClick={() => role.setSelectedRole(role.id)} key={role.id} className='btn-2'>мастер</button>
+          {role.roles.map(i => 
+            <button key={i.id} 
+            
+            style={i.id === 1 && {hover: true,} ? {background: "rgba(39, 196, 110, .4)"} : null}
+            className='btn-1'>
+              {i.title}
+              </button>
+            )
+            
+            // <button onClick={() => role.setSelectedRole(role.id)} key={role.id} className='btn-2'>мастер</button>
+          }
           </div>
         </div>
         }

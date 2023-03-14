@@ -7,6 +7,7 @@ export default class LinkStore {
     this._selectedLink = {}
     makeAutoObservable(this)
   }
+  
   setSelectedRole(link) {
     this._selectedLink = link
   }
