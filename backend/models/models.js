@@ -2,6 +2,7 @@ const sequelize = require('../db')
 const { DataTypes } =require('sequelize')
 
 
+// Таблицы
 const User = sequelize.define('user', {
   id: {type: DataTypes.INTEGER, primaryKey:true, autoIncrement:true},
   email: {type: DataTypes.STRING, unique: true, allowNull: false},
@@ -22,7 +23,7 @@ const Appointment = sequelize.define('appointment', {
 
 
 const UserRole = sequelize.define('user_role', {
-  id: {type: DataTypes.INTEGER,  primaryKey:true,  autoIncrement:true, defaultValue: 1 ,onUpdate: 'cascade', onDelete:'cascade', foreignKeyTo: User},  
+  id: {type: DataTypes.INTEGER,  primaryKey:true,  autoIncrement:true, onUpdate: 'cascade', onDelete:'cascade'},  
   role: {type: DataTypes.STRING, unique: true, allowNull: false},
   },
 { 
@@ -30,7 +31,7 @@ const UserRole = sequelize.define('user_role', {
 })
 
 const AppointmentStatus = sequelize.define('appoint_status', {
-  id: {type: DataTypes.INTEGER,  primaryKey:true, autoIncrement:true ,foreignKeyTo: Appointment},  
+  id: {type: DataTypes.INTEGER,  primaryKey:true, autoIncrement:true},  
   status: {type: DataTypes.STRING, allowNull: false},
   },
 { 
@@ -38,7 +39,7 @@ const AppointmentStatus = sequelize.define('appoint_status', {
 })
 
 const UserReputation = sequelize.define('user_reputation', {
-  id: {type: DataTypes.INTEGER, primaryKey:true , autoIncrement:true ,onUpdate: 'cascade', onDelete: 'cascade', foreignKeyTo: User}, 
+  id: {type: DataTypes.INTEGER, primaryKey:true , autoIncrement:true ,onUpdate: 'cascade', onDelete: 'cascade'}, 
   
   reputation: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0, },
   },
@@ -49,24 +50,24 @@ const UserReputation = sequelize.define('user_reputation', {
 const GalleryPost = sequelize.define('gallery_post', {
   id: {type: DataTypes.INTEGER,  primaryKey:true, autoIncrement: true}, 
   img: {type: DataTypes.STRING, allowNull: false},
-  name: {type: DataTypes.STRING, allowNull: false},
+  title: {type: DataTypes.STRING, allowNull: true},
   description: {type: DataTypes.STRING, allowNull: true},
-  author: {type: DataTypes.INTEGER, allowNull: false, foreignKeyTo: User, defaultValue: 0},
-  created_at: {type: DataTypes.STRING, allowNull: true, defaultValue: new Date().toString()}
-
+  created_at: {type: DataTypes.STRING, allowNull: true, defaultValue: new Date().toString()},
+  
 },
 { 
   timestamps: false,
 })
 
-// USER -- APPOINTMENT
+// Связи
+
 User.hasMany(Appointment)
 Appointment.belongsTo(User)
 
-User.hasOne(UserReputation)
+User.hasMany(UserReputation)
 UserReputation.belongsTo(User)
 
-User.hasMany(GalleryPost)
+User.hasMany(GalleryPost, {as: 'author'})
 GalleryPost.belongsTo(User)
 
 AppointmentStatus.hasMany(Appointment)
