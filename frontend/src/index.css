@@ -33,19 +33,39 @@ html, body {
 
 /* ROOT */
 #root {
-  display: flex; 
-  justify-content: center;
-
-  height: max-content;
+  margin: 0;
 }
 
 /* APP -> App.js*/ 
 .App {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 36rem);
+  gap: 8rem;
+  justify-content: center;
+}
+
+.center {
+  position: relative;
+}
+
+.center__elem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+}
+
+.app-router {
+  z-index: 9;
+  width: 36rem;
+  height: 28rem;
+  top: 0;
   
-  
-  
-  
+}
+
+.ui__columns .columns-box div{
+  background-color: #f7f7f7;
 }
 
 h1 {

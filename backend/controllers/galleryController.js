@@ -1,21 +1,34 @@
 const uuid = require('uuid')
 const path = require('path')
-const mysql = require('mysql')
+
 
 const ApiError = require('../error/ApiError')
-const {GalleryPost, PostInfo} = require('../models/models')
+const {GalleryPost, User} = require('../models/models')
 
 
 class GalleryPostController {
-  async addPost(req, res, next) {
+  async add(req, res, next) {
     try {
-      const {name, description, author} = req.body
+      let {title, description} = req.body
       const {created_at} = new Date();
       const {img} = req.files
-      let fileName = uuid.v4() + ".jpg"
+      let fileName = img.name
       img.mv(path.resolve(__dirname, '..', 'static', fileName))
+      const post = await GalleryPost.create({title, description, created_at, img: fileName})
 
-      const post = await GalleryPost.create({name, description, author, created_at, img: fileName})
+      // if(author) {
+      //   author = JSON.parse(author)
+      //   author.forEach(i => 
+      //     GalleryPost.create({
+      //       title: i.title,
+      //       description: i.description,
+      //       userId: User.id
+      //     }))
+      // }
+
+   
+
+      
       return res.json(post) 
 
     } catch(e) {
@@ -23,7 +36,7 @@ class GalleryPostController {
     }
   }
   
-  async deletePost(req, res) {
+  async delete(req, res) {
     try {
 
     } catch(e) {
@@ -31,7 +44,7 @@ class GalleryPostController {
     }  
   }
 
-  async updatePost(req, res) {
+  async update(req, res) {
       
   }
 
@@ -51,17 +64,11 @@ class GalleryPostController {
     const {id} = req.params
     const post = await GalleryPost.findOne(
     {
-      where: {id},
-      // include: [{img: GalleryPost, as: 'img'}]
+      where: {id}
     }
     )
-
+    return res.json(post)
   }
-
-
-  
-
-
 }
 
 module.exports = new GalleryPostController()

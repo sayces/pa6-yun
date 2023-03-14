@@ -1,6 +1,6 @@
 
 import React from 'react'
-import Columns from '../components/ui/columns/Columns.jsx';
+import Columns from '../components/ui/Columns.jsx';
 import AuthLink from '../components/ui/header/AuthLink.jsx';
 import CalendarLink from '../components/ui/header/CalendarLink.jsx';
 import GalleryLink from '../components/ui/header/GalleryLink'

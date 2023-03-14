@@ -1,0 +1,81 @@
+.page {
+  position: absolute;
+  background: transparent;
+  border-radius: 1rem;
+  width: 36rem;
+  height: 28rem;
+  top: 28rem;
+  backdrop-filter: blur(0.15rem);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+}
+
+
+
+.form__auth {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(22, 19, 19, 0.6);
+  
+  align-items: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  
+}
+
+.form__auth div {
+  justify-items: center;
+}
+
+.form__auth input {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 1rem;
+  margin: 1rem;
+  width: 30rem;
+  height: 3rem;
+  padding: 1rem;
+  color: rgb(0, 0, 0);
+  font-size: 2rem;
+}
+
+
+.form__auth label {
+  color: rgb(226, 226, 226);
+  width: 30rem;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+.form__auth button {
+  width: 20rem;
+  height: 4rem;
+  margin: 2rem 0 0 0;
+  border: none;
+  border-radius: 1rem;
+  background-color: rgb(185, 250, 159);
+  
+  font-size: 1.5rem;
+  border: 1rem solid rgba(171, 230, 147, 0);
+  line-height: 2rem;
+  backdrop-filter: blur(0.6rem);
+  transition: all 0.5s;
+}
+
+.form__auth button:hover {
+  width: 20rem;
+  height: 5rem;
+  margin: 2rem 0 0 0;
+  line-height: 2rem;
+  border: 0.3rem solid rgba(171, 230, 147, 1);
+  color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  background-color: rgba(171, 230, 147, .6);
+  
+  font-size: 1.5rem;
+  
+  backdrop-filter: blur(.6rem);
+  transition: all 0.5s;
+}
