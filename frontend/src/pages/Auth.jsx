@@ -10,16 +10,16 @@ const Auth = function () {
       <form className="form__auth" action="" method="post">
         <div>
           <label for="name">прошу, ваш логин</label>
-          <input type="text" name="name" id="name"/>
+          <input type="text" name="name" id="email"/>
         </div>
         <div>
           <label for="name">прошу, ваш пароль</label>
-          <input type="text" name="name" id="name"/>
+          <input type="text" name="name" id="password"/>
         </div>
         
         <button>войти</button>
         <label >новенький?</label>
-        <Link>регистрируйся</Link>
+        <Link to>регистрируйся</Link>
       </form>
     </div>
   )
