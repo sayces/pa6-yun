@@ -7,32 +7,40 @@ export default function MyCalendar() {
 
   let date = (new Date());
   
-const arr = Array() = [
-    {0: "январь"},
-    {1: 'февраль'},
-    {2: 'март'},
-    {3: "апрель"},
-    {4: "май"},
-    {5: "июнь"},
-    {6: "июль"},
-    {7: "август"},
-    {8: "сентябрь"},
-    {9: "окрябрь"},
-    {10: "ноябрь"},
-    {11: "декабрь"}
-  ]
+const arr = () =>
 
+[
+  "январь",
+  "февраль",
+  "март",
+  "апрель",
+  "май",
+  "июнь",
+  "июль",
+  "август",
+  "сентябрь",
+  "окрябрь",
+  "ноябрь",
+  "декабрь",
+    
+]
+
+
+
+// console.log(arr.map((num => num)))
+// console.log(arr.map((i => i)))
 
   return (
     <div className='page page__calendar'>
       <Calendar 
         value={date}
-        onClickDay = {({value}) => console.log(value.get)}
+        // onClickDay =
         minDate={date}
         minDetail = "year"
         maxDetail = "month"
         showNeighboringMonth = {false}
-        navigationLabel = {(x) => arr.map((x) => x) === date.getMonth() ? console.log(x) : null }
+        // navigationLabel = {({date, i}) => arr.map((i => i)) === date.getMonth() ? console.log(arr.map((i => i))) : null }
+        
         tileClassName = {({ date, view }) => view === 'month' && date.getDay() === 0 ? 'sunday' : null}
         
       />  
