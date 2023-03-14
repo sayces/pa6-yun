@@ -38,15 +38,15 @@
   height: 3rem;
   padding: 1rem;
   color: rgb(0, 0, 0);
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 
 
 .form__auth label {
   color: rgb(226, 226, 226);
-  width: 30rem;
+  width: auto;
   padding: 1rem;
-  font-size: 2rem;
+  font-size: 1.4rem;
 }
 
 .form__auth button {
@@ -78,4 +78,24 @@
   
   backdrop-filter: blur(.6rem);
   transition: all 0.5s;
+}
+
+.form__auth-link {
+  color: rgb(226, 226, 226);
+  width: auto;
+  padding: 1rem;
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: all 0.5s;
+  line-height: 2rem;
+}
+
+.form__auth-link:hover {
+  color: rgb(165, 255, 105);
+  width: auto;
+  padding: 1rem;
+  
+  font-size: 1.5rem;
+  transition: all 0.5s;
+  
 }
