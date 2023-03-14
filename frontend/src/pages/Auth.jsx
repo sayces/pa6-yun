@@ -35,8 +35,8 @@ const click = async () => {
   
   user.setUser(user)
   user.setIsAuth(true)
-
   const history = Navigate({CALENDAR_ROUTE})
+  return history
 }
   } catch (e) {
     alert(e.response.data.message)
