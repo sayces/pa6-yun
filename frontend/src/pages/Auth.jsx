@@ -1,6 +1,6 @@
 import React, { useContext, useState} from 'react'
 import './pages.css';
-import { Link, useLocation, Navigate } from 'react-router-dom'
+import { Link, useLocation, redirect, useNavigate, Route} from 'react-router-dom'
 import { CALENDAR_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE } from '../utils/consts';
 import 'react-bootstrap'
 import '../store/RoleStore'
@@ -12,7 +12,6 @@ import { login, signup } from '../http/userAPI'
 
 const Auth = observer(() => {
 
-   Navigate();
   const location = useLocation()
   const {user} = useContext(Context);
   const {role} = useContext(Context);
@@ -22,24 +21,26 @@ const Auth = observer(() => {
   const [password, setPassword] = useState('')
   const [userRoleId, setRole] = useState(1)
 
+  const navigate = useNavigate()
 
 
 const click = async () => {
   
   try {
     let data;
-  if (isLogin) { 
-    data = await login(email, password); 
-  } else {
-    data = await signup(email, password, userRoleId)
-  
-  user.setUser(user)
-  user.setIsAuth(true)
-  const history = Navigate({CALENDAR_ROUTE})
-  return history
-}
+    if (isLogin) { 
+      data = await login(email, password); 
+      console.log(data)
+    } else {
+      data = await signup(email, password, userRoleId)
+      console.log(data)
+    }
+    user.setUser(user)
+    user.setIsAuth(true)
+    navigate(CALENDAR_ROUTE)
   } catch (e) {
     alert(e.response.data.message)
+    
   }
 }
 
@@ -48,8 +49,7 @@ const click = async () => {
     <div className='page page__auth'>
       <form className="form__auth" action="submit" 
       method='POST' 
-      onSubmit={(e) => e.preventDefault()
-      }
+      onSubmit={click}
       >
 
 
@@ -94,7 +94,9 @@ const click = async () => {
             {isLogin ? 'создай аккаунт' : 'авторизуйся'}
           </Link>
         </div>
-        <button onClick={click}>{isLogin ? 'войти' : 'создать'}</button> 
+       
+       
+       <button onClick={click}>{isLogin ? 'войти' : 'создать'}</button>
       </form>
       
     </div>

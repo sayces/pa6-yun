@@ -16,12 +16,11 @@ const  AppRouter = observer(() => {
 
   const {user} = useContext(Context)
   console.log(user)
-  let isLogin = user.isAuth
-
+  
   return (
     
     <Routes>
-        {isLogin && authRoutes.map(({path, Element}) =>
+        {user.isAuth && authRoutes.map(({path, Element}) =>
           <Route key={path} path={path} element={<Element/>} exect/>
         )}
         {publicRoutes.map(({path, Element}) =>
