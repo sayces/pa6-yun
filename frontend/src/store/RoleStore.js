@@ -3,10 +3,7 @@ import {makeAutoObservable} from 'mobx'
 
 export default class RoleStore {
   constructor() {
-    this._roles = [
-      {id: 1, title: 'master'},
-      {id: 2, title: 'client'},
-    ]
+    this._roles = {}
     this._selectedRole = {}
     makeAutoObservable(this)
   }

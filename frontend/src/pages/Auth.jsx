@@ -1,6 +1,6 @@
-import React, { useContext, useState} from 'react'
+import React, { useContext, useState, useEffect} from 'react'
 import './pages.css';
-import { Link, useLocation, redirect, useNavigate, Route} from 'react-router-dom'
+import { Link, useLocation, useNavigate} from 'react-router-dom'
 import { CALENDAR_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE } from '../utils/consts';
 import 'react-bootstrap'
 import '../store/RoleStore'
@@ -10,46 +10,52 @@ import { observer } from 'mobx-react-lite';
 import { login, signup } from '../http/userAPI'
 
 
+
 const Auth = observer(() => {
 
-  const location = useLocation()
   const {user} = useContext(Context);
-  const {role} = useContext(Context);
+  
+  const location = useLocation()
   let isLogin = location.pathname === LOGIN_ROUTE
-
+  
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userRoleId, setRole] = useState(1)
-
+  const [userRole, setUserRole] = useState(1)
+  
   const navigate = useNavigate()
 
-
 const click = async () => {
-  
+   
   try {
     let data;
     if (isLogin) { 
       data = await login(email, password); 
       console.log(data)
+      console.log(email, password)
+      
     } else {
-      data = await signup(email, password, userRoleId)
-      console.log(data)
+      data = await signup(email, password, userRole) 
+      
+
     }
     user.setUser(user)
     user.setIsAuth(true)
-    navigate(CALENDAR_ROUTE)
-  } catch (e) {
-    alert(e.response.data.message)
+    user.setUserRole(user)
+
+    console.log(user)
     
+    return navigate(CALENDAR_ROUTE)
+  } catch (e) {
+    alert (e.response.data.message)
   }
 }
-
-
+  
+  
   return (
     <div className='page page__auth'>
-      <form className="form__auth" action="submit" 
-      method='POST' 
-      onSubmit={click}
+      <form className="form__auth" 
+      
+      onSubmit={e => e.preventDefault()}
       >
 
 
@@ -79,8 +85,8 @@ const click = async () => {
           <label>выберите свою роль</label>
           
           <div className='form__auth__radio'>
-          {role.roles.map(role =>       
-            <button className='btn__radio' onClick={e => setRole(e.target.value)} key={role.id} value={userRoleId}>{role.title}</button>
+          {user.roles.map(role =>       
+            <button className='btn__radio' onClick={e => setUserRole(e.target.value)} key={role.id} value={role.id}>{role.roles}</button>
           )}
           
           </div>

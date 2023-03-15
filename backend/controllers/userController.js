@@ -52,13 +52,8 @@ class UserController {
   }
   
   async check(req, res, next) {
-    // const {id} = req.query
-    //   if (!id) {
-    //     return next(ApiError.err404('пользователя не существует [wrong id]'))
-    //   }
-    // res.json(id)
-
     const token = generateJwt(req.user.id, req.user.email, req.user.userRoleId )
+    return res.json({token})
   }
 
   async update_profile(req, res) {

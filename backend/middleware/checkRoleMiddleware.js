@@ -12,7 +12,7 @@ return function(req, res, next) {
     }
     const decoded = jwt.verify(token, process.env.SECRET_KEY)
     if (decoded.userRoleId !== userRoleId) {
-      return res.status(403).json({message: `нет доступа к роли -- ${userRoleId}`})
+      return res.status(403).json({message: `доступа для вас нет`})
     }
     req.user = decoded
   } catch (e) {

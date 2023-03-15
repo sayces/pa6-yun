@@ -7,7 +7,7 @@ function Profile() {
     <div className='page page__profile'>
       <h1 className='wellcome'>добро пожаловать в профиль</h1>
       
-      <label>мои записи:</label>
+      <h1>мои записи:</h1>
       
       <Link to={CALENDAR_ROUTE}>прошу к календарю</Link>
     </div>

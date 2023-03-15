@@ -2,7 +2,11 @@ import React from 'react'
 
 const Gallery = () => {
   return (
-    <div><h1>GALLERY</h1></div>
+    <div className='page page__gallery'>
+      
+      <h1>AT THE MOMENT PAGE DO NOT WORKS</h1>
+      
+    </div>
   )
 }
 

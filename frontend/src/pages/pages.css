@@ -4,13 +4,14 @@
   border-radius: 1rem;
   width: 36rem;
   height: 28rem;
-  top: 28rem;
+  top: 20rem;
   backdrop-filter: blur(0.15rem transition all);
   justify-content: center;
   align-items: center;
   display: flex;
-  
+  flex-direction: column;
 }
+
 
 
 

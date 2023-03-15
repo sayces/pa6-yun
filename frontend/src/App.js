@@ -6,26 +6,30 @@ import NavBar from "./components/ui/NavBar";
 import Columns from '../src/components/ui/Columns';
 import './index.css'
 import { observer } from "mobx-react-lite";
-import data, {auth} from './http/userAPI'
+import {auth, fetchRole} from './http/userAPI'
 import {Context} from './index';
-import { Spinner } from "react-bootstrap";
 
 
 
 const App = observer(() => {
   const {user} = useContext(Context);
-  const setLoading = useState(true)
+  const [loading, setLoading] = useState(true)
+
+  
 
   useEffect(() => {
-    setTimeout(() => {
+    
       auth().then(data => {
         user.setUser(true)
-        user.serIsAuth(true)
+        user.setIsAuth(true)
+        
+  
       }).finally(() => setLoading(false))
-    }, 1000)   
-  })
+    }, [])
 
- 
+ if (loading) {
+    return <h1>LOADING</h1>
+    }
 
   return (
     <div className="App">
