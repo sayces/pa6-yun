@@ -6,9 +6,9 @@ const authMiddleware = require('../middleware/authMiddleware')
 
 router.post('/signup', userController.signup)
 router.post('/login', userController.login)
-router.get('/auth', authMiddleware, checkRole, userController.check)
-router.put('/profile/:id/update', checkRole, userController.update_profile)
+router.get('/auth', authMiddleware, userController.check)
+router.put('/profile/:id/update', userController.update_profile)
 router.get('/profile/:id', userController.profile)
-router.get('/list', checkRole(), userController.user_list)
+router.get('/', userController.getAllRoles)
 
 module.exports = router

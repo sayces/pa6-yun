@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-module.exports = function (userRoleId) {
+module.exports = function (userRole) {
 return function(req, res, next) {
   if (req.method == "OPTIONS") {
     next()

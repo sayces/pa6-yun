@@ -5,10 +5,7 @@ export default class UserStore {
   constructor() {
     this._isAuth = false
     this._users = {}
-    this._roles = [
-      // {id: 1, role: "adm"},
-      // {id: 2, role: "adm"}
-    ]
+    this._roles = []
 
     makeAutoObservable(this)
   }

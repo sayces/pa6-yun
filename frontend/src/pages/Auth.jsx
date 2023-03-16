@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect} from 'react'
+import React, { useContext, useState } from 'react'
 import './pages.css';
 import { Link, useLocation, useNavigate} from 'react-router-dom'
 import { CALENDAR_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE } from '../utils/consts';
@@ -14,15 +14,13 @@ import { login, signup } from '../http/userAPI'
 const Auth = observer(() => {
 
   const {user} = useContext(Context);
-  
+  const navigate = useNavigate()
   const location = useLocation()
   let isLogin = location.pathname === LOGIN_ROUTE
   
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userRole, setUserRole] = useState(1)
-  
-  const navigate = useNavigate()
+  const [userRole, setUserRole] = useState('')
 
 const click = async () => {
    
@@ -35,16 +33,16 @@ const click = async () => {
       
     } else {
       data = await signup(email, password, userRole) 
-      
+      navigate(LOGIN_ROUTE)
 
     }
     user.setUser(user)
     user.setIsAuth(true)
     user.setUserRole(user)
 
-    console.log(user)
+    navigate(CALENDAR_ROUTE)
     
-    return navigate(CALENDAR_ROUTE)
+    
   } catch (e) {
     alert (e.response.data.message)
   }
@@ -86,7 +84,7 @@ const click = async () => {
           
           <div className='form__auth__radio'>
           {user.roles.map(role =>       
-            <button className='btn__radio' onClick={e => setUserRole(e.target.value)} key={role.id} value={role.id}>{role.roles}</button>
+            <button className='btn__radio' onClick={e => setUserRole(e.target.value)} key={role.id} value={role.id}>{role.role}</button>
           )}
           
           </div>

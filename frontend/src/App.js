@@ -18,14 +18,16 @@ const App = observer(() => {
   
 
   useEffect(() => {
+    fetchRole().then(data => user.setRole(data))
     
-      auth().then(data => {
+
+    auth().then(data => {
         user.setUser(true)
         user.setIsAuth(true)
         
   
       }).finally(() => setLoading(false))
-    }, [])
+    }, [user])
 
  if (loading) {
     return <h1>LOADING</h1>

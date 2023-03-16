@@ -22,13 +22,13 @@ export const auth = async () => {
   return jwt_decode(data.token)
 }
 
-export const createRole = async (userRoleId) => {
-  const {data} = await $host.post('api/user', userRoleId)
+export const createRole = async (user) => {
+  const {data} = await $host.post('api/user', user)
   return data
 }
 
-export const fetchRole = async (userRoleId) => {
-  const {data} = await $host.get('api/user', userRoleId)
+export const fetchRole = async () => {
+  const {data} = await $authHost.get('api/user')
   return data
 }
 

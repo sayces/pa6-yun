@@ -137,6 +137,23 @@
 
 }
 
+.form__auth__radio button:checked  {
+  width: 14rem;
+  height: 3rem;
+  background: rgb(255, 124, 124);
+  border-color: rgb(255, 120, 120) ;
+  color: black;
+  transition: all 0.1s;
+}
+.form__auth__radio button:focus-within  {
+  width: 14rem;
+  height: 3rem;
+  background: rgb(61, 17, 17);
+  border-color: rgb(243, 243, 243) ;
+  color: black;
+  transition: all 0.1s;
+}
+
 div .form__auth__link {
   display: flex;
   flex-direction: row;
