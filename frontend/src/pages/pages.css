@@ -13,8 +13,6 @@
 }
 
 
-
-
 .form__auth {
   display: flex;
   flex-direction: column;
@@ -164,3 +162,89 @@ div .form__auth__link a {
   height: 2rem;
   color: rgb(255, 213, 198);
 }
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(7,4rem);
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+  position: absolute;
+  top:  18rem;
+}
+
+.column{
+  width: 4rem;
+  height: 20rem;
+  background: linear-gradient(0deg, #D9D9D9 20%, rgba(217, 217, 217, 0) 40%);
+}
+
+.columns .column-1 {
+  grid-column: 1;
+  
+}
+
+.columns .column-2 {
+  grid-column: 2;
+  
+}
+
+.columns .column-3 {
+  grid-column: 3;
+  
+}
+
+.columns .column-4 {
+  grid-column: 4;
+  
+}
+
+.columns .column-5 {
+  grid-column: 5;
+  
+}
+
+.columns .column-6 {
+  grid-column: 6;
+  
+}
+
+.columns .column-7 {
+  grid-column: 7;
+  
+}
+
+.calendar-info {
+  justify-content: center;
+  width: 28rem;
+  height: 28rem;
+  flex-direction: column;
+  background: #a8a8a88f;
+  border: #D9D9D9 solid 0.4rem;
+  display: flex;
+  position: absolute;
+  z-index: 9;
+  padding:2rem;
+  top:20rem;
+  left: 4rem;
+  backdrop-filter: blur(1rem);
+  border-radius: 1rem;
+}
+
+
+.calendar-info__form {
+  justify-content: center;
+  width: 23rem;
+  height: 22rem;
+  flex-direction: column;
+  background: #ffffff00;
+  box-shadow: 0 0 2rem rgba(34, 34, 34, 0.63);
+  display: flex;
+  z-index: 9;
+  padding:2rem;
+  top:20rem;
+  backdrop-filter: blur(1rem);
+  border-radius: 1rem;
+}
+
+

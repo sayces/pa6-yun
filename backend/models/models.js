@@ -15,6 +15,8 @@ const User = sequelize.define('user', {
 
 const Appointment = sequelize.define('appointment', {
   id: {type: DataTypes.INTEGER, primaryKey:true,  autoIncrement:true, onUpdate: 'cascade', onDelete:'cascade'},
+  date: {type: DataTypes.STRING ,unique: true, allowNull: false, onUpdate: 'cascade', onDelete:'cascade'},
+    
   },
 { 
   timestamps: false,

@@ -1,4 +1,4 @@
-const { Appointment } = require('../models/models')
+const { Appointment, User } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class AppointController {
@@ -11,13 +11,21 @@ class AppointController {
   }
   
   async create(req, res) {
+    const {userId, date} = req.body
     
+    const appoint = await Appointment.create({userId, date})
+    
+    return res.json(appoint)
+      
   }
 
   async update(req, res) {
 
   }
 
+  async delete(req,res) {
+
+  }
 
 }
 

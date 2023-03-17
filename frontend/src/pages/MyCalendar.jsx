@@ -1,51 +1,65 @@
 import Calendar from 'react-calendar';
-import React from 'react';
+import React, {useState, useContext , useEffect} from 'react';
 import '../components/ui/calendar.css';
-// import 'react-calendar/dist/Calendar.css';
+import { useNavigate} from 'react-router-dom';
+import { CALENDAR_ROUTE } from '../utils/consts';
+import { createAppoint, fetchAppoint } from '../http/appointAPI';
+import {Context} from '../index';
+import { observer } from 'mobx-react-lite';
+import { fetchUser } from '../http/userAPI';
 
-export default function MyCalendar() {
 
-  let date = (new Date());
+
+const MyCalendar = observer(() => {
+
+  const navigate = useNavigate();
+
   
-// const arr = () =>
-
-// [
-//   "январь",
-//   "февраль",
-//   "март",
-//   "апрель",
-//   "май",
-//   "июнь",
-//   "июль",
-//   "август",
-//   "сентябрь",
-//   "окрябрь",
-//   "ноябрь",
-//   "декабрь",
+  const {appoint} = useContext(Context)
+  const {user} = useContext(Context)
+  console.log(user.users)
+  const [date, setDate] = useState('')
+  
+  // const [userId, setUserId] = useState(
     
-// ]
+    
+
+  
+  
+  useEffect(() => {
+    fetchUser().then(data => setUsers(data))
+
+      }, [])
+
+  
 
 
+const click = async (e) => {
+   e.preventDefault()
 
-// console.log(arr.map((num => num)))
-// console.log(arr.map((i => i)))
+    createAppoint({date: date, 
+      // userId: userId
+    }).then(data => setDate())
+    console.log(date)
+    
+    
+    
+
+}
 
   return (
-    <div className='page page__calendar'>
-      <Calendar 
-        value={date}
-        // onClickDay =
-        minDate={date}
-        minDetail = "year"
-        maxDetail = "month"
-        showNeighboringMonth = {false}
-        // navigationLabel = {({date, i}) => arr.map((i => i)) === date.getMonth() ? console.log(arr.map((i => i))) : null }
-        
-        tileClassName = {({ date, view }) => view === 'month' && date.getDay() === 0 ? 'sunday' : null}
-        
-      />  
-    </div>  
-      
+        <div className='page calendar-info'>
+          <form className="calendar-info__form" action="POST" >
+            <label>запланируйте дату</label>
+            <input 
+            onChange={e => setDate(e.target.value)}
+            type="datetime-local" value={date} />
+            
+            <button onClick={click}>записться</button>
+          </form>
+        </div>
+    
   ); 
   
-}
+})
+export default MyCalendar

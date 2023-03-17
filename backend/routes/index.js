@@ -7,7 +7,7 @@ const galleryRouter = require('./galleryRouter')
 const authMiddleware = require('../middleware/authMiddleware')
 
 router.use('/user', userRouter)
-router.use('/appointment', appointRouter)
+router.use('/calendar', appointRouter)
 router.use('/gallery', galleryRouter)
 
 

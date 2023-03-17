@@ -1,5 +1,5 @@
 const ApiError = require('../error/ApiError')
-const {User, UserReputation, UserRole} = require('../models/models')
+const {User, UserRole} = require('../models/models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 

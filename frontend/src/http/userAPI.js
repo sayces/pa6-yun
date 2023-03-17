@@ -32,3 +32,10 @@ export const fetchRole = async () => {
   return data
 }
 
+export const fetchUser = async () => {
+  const {data} = await $authHost.get('api/user')
+  return data
+}
+
+
+

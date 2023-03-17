@@ -2,12 +2,12 @@ const Router = require('express')
 const router = new Router()
 const appointController = require('../controllers/appointController')
 
-router.get('/myappoint',appointController.getMine)
-router.get('/myappoint/:id',)
-router.get('/appoint',appointController.getAll)
-router.post('/get_appoint',appointController.create)
-router.put('/myappoint/update',appointController.update)
-
+router.get('/',appointController.getMine)
+// router.get('/calendar/:id',)
+router.get('/',appointController.getAll)
+router.post('/',appointController.create)
+router.put('/',appointController.update)
+router.delete('/', appointController.delete)
 
 
 module.exports = router
