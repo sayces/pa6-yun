@@ -2,30 +2,25 @@ const { Appointment, User } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class AppointController {
-  async getMine(req, res) {
 
+  // async getMine(req, res) {}
+  
+  async getAllAppoint(req, res) {
+    const appoints = await Appointment.findAll()
+    return res.json(appoints)
   }
   
-  async getAll(req, res) {
-
-  }
-  
-  async create(req, res) {
+  async appoint(req, res) {
     const {userId, date} = req.body
-    
     const appoint = await Appointment.create({userId, date})
     
     return res.json(appoint)
       
   }
 
-  async update(req, res) {
+  // async updateAppint(req, res) {}
 
-  }
-
-  async delete(req,res) {
-
-  }
+  // async deleteDelete(req,res) {}
 
 }
 

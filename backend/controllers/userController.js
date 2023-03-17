@@ -73,7 +73,7 @@ class UserController {
     return res.json({token})
   }
   
-  async check(req, res) {
+  async auth(req, res) {
 
     const token = generateJwt(req.user.id, req.user.email, req.user.userRoleId )
     
@@ -83,8 +83,8 @@ class UserController {
   
   async getAllUsers(req, res) {
 
-    let {email, name, userRoleId} = req.body
-    const users = await User.findAll({email, name, userRoleId})
+    // let {email, name, userRoleId} = req.body
+    const users = await User.findAll()
     
     return res.json(users)
 

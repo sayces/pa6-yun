@@ -7,10 +7,10 @@ const roleController = require('../controllers/roleController')
 
 router.post('/signup', userController.signup)
 router.post('/login', userController.login)
-router.get('/auth', authMiddleware, userController.check)
+router.get('/auth', authMiddleware, userController.auth)
 
-router.get('/', userController.getAllUsers)
-router.get('/', roleController.getAllRoles)
+router.get('/users', userController.getAllUsers)
+router.get('/roles', roleController.getAllRoles)
 
 
 module.exports = router

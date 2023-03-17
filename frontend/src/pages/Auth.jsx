@@ -29,14 +29,16 @@ const Auth = observer(() => {
 
 
   const click = async () => {
+
     let data;
+
     try {
 
     if (isLogin) { 
 
       data = await login( email, password ); 
 
-      console.log( data.id )
+      console.log( user.user )
 
     } else {
 
@@ -44,15 +46,14 @@ const Auth = observer(() => {
 
       navigate( LOGIN_ROUTE )
 
-      console.log( data.id )
+      console.log( user.user )
       
 
     }
     } catch(e) { alert ( e.promise.data.message ) }
     
-    user.setUser(data.id)
-    user.setIsAuth(true)
-    user.setRole(user)
+    user.setUser( user )
+    user.setIsAuth( true )
 
     navigate(CALENDAR_ROUTE)
     
@@ -93,14 +94,14 @@ const Auth = observer(() => {
           <label>выберите свою роль</label>
           
           <div className='form__auth__radio'>
-          {/* {user.users.map(user => 
+          {user.roles.map(role => 
            
             <button className='btn__radio' 
             required={true} onClick={e => setUserRole(e.target.value)} 
-            key={users.id} value={role.id} name='role'>{role.role}</button>
+            key={role.id} value={role.id} name='role'>{role.role}</button>
             
             
-          ) }    */}
+          ) }   
           
           </div>
         </div>

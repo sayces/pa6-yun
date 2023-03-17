@@ -29,13 +29,13 @@ export const auth = async () => {
 }
 
 export const getAllUsers = async () => {
-  const {data} = await $host.get('api/user')
+  const {data} = await $host.get('api/user/users')
   return data
 
 }
 
 export const getAllRoles = async () => {
-  const {data} = await $host.get('api/user')
+  const {data} = await $host.get('api/user/roles')
   return data
 
 }

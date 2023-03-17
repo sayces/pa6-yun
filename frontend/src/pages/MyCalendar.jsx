@@ -9,8 +9,8 @@ import '../components/calendar.css';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 
-import { createAppoint, fetchAppoint } from '../http/appointAPI';
-// import { fetchAppoint } from '../http/userAPI';
+import { getAllAppoints } from '../http/appointAPI';
+// import { } from '../http/userAPI';
 
 
 
@@ -25,7 +25,7 @@ const MyCalendar = observer(() => {
   console.log(user)
   console.log(appoint)
 
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(Date())
   
   // const [userId, setUserId] = useState()
     
@@ -35,18 +35,18 @@ const MyCalendar = observer(() => {
   
   useEffect(() => {
 
-    fetchAppoint().then(data => fetchAppoint(data))
+    getAllAppoints().then(data => appoint.setAppoints(data))
 
-  }, [])
+  }, [appoint])
 
 
 const click = async (e) => {
    e.preventDefault()
 
-    createAppoint({date: date, 
-      userId: user.users.id
-    }).then(data => setDate(data))
-    console.log(date)
+    // createAppoint({date: date, 
+    //   userId: user.users.id
+    // }).then(data => setDate(data))
+    // console.log(date)
     
 }
 

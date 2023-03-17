@@ -11,7 +11,7 @@ return function(req, res, next) {
       return res.status(401).json({message: 'пользователь не авторизован'})
     }
     const decoded = jwt.verify(token, process.env.SECRET_KEY)
-    if (decoded.userRoleId !== userRoleId) {
+    if (decoded.userRoleId !== userRole) {
       return res.status(403).json({message: `доступа для вас нет`})
     }
     req.user = decoded

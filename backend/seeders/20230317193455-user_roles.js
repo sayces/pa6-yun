@@ -7,12 +7,12 @@ module.exports = {
       
       {
         id: 1,
-        role: "admin"
+        role: "мастер"
         
       },
       {
         id: 2,
-        role: "client"
+        role: "клиент"
       }
       
     ])

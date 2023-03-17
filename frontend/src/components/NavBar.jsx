@@ -22,12 +22,12 @@ const NavBar = observer( () => {
     
     try {
 
-      user.setUser =( {} )
+      user.setUser( {} )
       user.setIsAuth( false )
       
       localStorage.removeItem('token') 
       
-      console.log(user.users)
+      console.log(user)
       
       navigate( LOGIN_ROUTE )
 

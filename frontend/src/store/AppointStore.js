@@ -11,7 +11,7 @@ export default class AppointStore {
 
   }
 
-  setAppoint(appoints) { this._appoints = appoints }
+  setAppoints(appoints) { this._appoints = appoints }
 
   get appoints() { return this._appoints }
 

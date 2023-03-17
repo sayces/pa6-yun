@@ -16,11 +16,10 @@ const User = sequelize.define('user', {
 const Appointment = sequelize.define('appointment', {
   id: {type: DataTypes.INTEGER, primaryKey:true,  autoIncrement:true, onUpdate: 'cascade', onDelete:'cascade'},
   date: {type: DataTypes.STRING ,unique: true, allowNull: false, onUpdate: 'cascade', onDelete:'cascade'},
-    
   },
 { 
-  timestamps: false,
-  
+  updatedAt: false,
+  createdAt: true
 })
 
 
@@ -33,7 +32,7 @@ const UserRole = sequelize.define('user_role', {
 })
 
 const AppointmentStatus = sequelize.define('appoint_status', {
-  id: {type: DataTypes.INTEGER,  primaryKey:true, autoIncrement:true},  
+  id: {type: DataTypes.INTEGER,  primaryKey:true, autoIncrement:true },  
   status: {type: DataTypes.STRING, allowNull: false},
   },
 { 
