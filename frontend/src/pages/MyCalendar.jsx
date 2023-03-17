@@ -1,23 +1,30 @@
-import Calendar from 'react-calendar';
+
 import React, {useState, useContext , useEffect} from 'react';
-import '../components/ui/calendar.css';
-import { useNavigate} from 'react-router-dom';
-import { CALENDAR_ROUTE } from '../utils/consts';
-import { createAppoint, fetchAppoint } from '../http/appointAPI';
-import {Context} from '../index';
+
+
+import '../components/calendar.css';
+// import { CALENDAR_ROUTE } from '../utils/consts';
+
+// import { useNavigate } from 'react-router-dom';
+import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
-import { fetchUser } from '../http/userAPI';
+
+import { createAppoint, fetchAppoint } from '../http/appointAPI';
+// import { fetchAppoint } from '../http/userAPI';
 
 
 
 const MyCalendar = observer(() => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   
   const {appoint} = useContext(Context)
   const {user} = useContext(Context)
+
   console.log(user)
+  console.log(appoint)
+
   const [date, setDate] = useState('')
   
   // const [userId, setUserId] = useState()
@@ -27,36 +34,37 @@ const MyCalendar = observer(() => {
   
   
   useEffect(() => {
-    fetchUser().then(data => fetchUser(data))
 
-      }, [])
+    fetchAppoint().then(data => fetchAppoint(data))
 
-  
+  }, [])
 
 
 const click = async (e) => {
    e.preventDefault()
 
     createAppoint({date: date, 
-      // userId: userId
-    }).then(data => setDate())
+      userId: user.users.id
+    }).then(data => setDate(data))
     console.log(date)
     
-    
-    
-
 }
 
   return (
         <div className='page calendar-info'>
+
           <form className="calendar-info__form" action="POST" >
+
             <label>запланируйте дату</label>
             <input 
-            onChange={e => setDate(e.target.value)}
-            type="datetime-local" value={date} />
-            
+              onChange={e => setDate(e.target.value)}
+              type="datetime-local" value={date} 
+              />
+              
             <button onClick={click}>записться</button>
+            
           </form>
+
         </div>
     
   ); 

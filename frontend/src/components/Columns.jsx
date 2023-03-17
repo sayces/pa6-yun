@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { CALENDAR_ROUTE } from '../../utils/consts'
+import { CALENDAR_ROUTE } from '../utils/consts'
 import './columns.css'
 import logo from "./logo.svg"
 

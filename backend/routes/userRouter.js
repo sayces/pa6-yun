@@ -3,12 +3,14 @@ const router = new Router()
 const userController = require('../controllers/userController')
 const checkRole = require('../middleware/checkRoleMiddleware')
 const authMiddleware = require('../middleware/authMiddleware')
+const roleController = require('../controllers/roleController')
 
 router.post('/signup', userController.signup)
 router.post('/login', userController.login)
 router.get('/auth', authMiddleware, userController.check)
-router.put('/profile/:id/update', userController.update_profile)
-router.get('/profile/:id', userController.profile)
-router.get('/', userController.getAllRoles)
+
+router.get('/', userController.getAllUsers)
+router.get('/', roleController.getAllRoles)
+
 
 module.exports = router

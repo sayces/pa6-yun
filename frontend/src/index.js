@@ -12,11 +12,17 @@ export const Context = createContext(null)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Context.Provider value={{
+
+  <Context.Provider 
+  value={{
+
     user: new UserStore(),
     appoint: new AppointStore()
+
   }}>
+    
     <App/>
+    
   </Context.Provider>
   
 );

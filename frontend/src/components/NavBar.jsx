@@ -1,26 +1,40 @@
 import React, { useContext } from 'react'
-import { Context } from '../../index'
+import { Context } from '../index'
+
 
 import { 
   Link, 
-  // useNavigate 
+  useNavigate 
 } 
   from 'react-router-dom'; 
 import './header.css';
-import { CALENDAR_ROUTE, GALLERY_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../utils/consts';
+import { CALENDAR_ROUTE, GALLERY_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 
 
-const NavBar = observer(() => {
+const NavBar = observer( () => {
   
-  const {user} = useContext(Context)
+  const { user } = useContext( Context )
   
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const logout = () => {
-    user.setUser({})
-    user.setIsAuth(false)
-    // return navigate(LOGIN_ROUTE)
+    
+    try {
+
+      user.setUser =( {} )
+      user.setIsAuth( false )
+      
+      localStorage.removeItem('token') 
+      
+      console.log(user.users)
+      
+      navigate( LOGIN_ROUTE )
+
+    } catch (e) {
+      return e.response.data.message 
+    }
+
   }
 
 

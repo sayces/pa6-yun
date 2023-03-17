@@ -2,32 +2,35 @@
 import React, { useContext, useEffect, useState} from "react"
 import AppRouter from "./components/AppRouter"
 import { BrowserRouter } from 'react-router-dom';
-import NavBar from "./components/ui/NavBar";
-import Columns from '../src/components/ui/Columns';
+import NavBar from "./components/NavBar";
+import Columns from '../src/components/Columns';
 import './index.css'
 import { observer } from "mobx-react-lite";
-import {auth, fetchRole} from './http/userAPI'
-import {Context} from './index';
+import { auth, getAllUsers } from './http/userAPI'
+import { Context } from './index';
 
 
 
 const App = observer(() => {
   const {user} = useContext(Context);
+  
   const [loading, setLoading] = useState(true)
 
-  
 
   useEffect(() => {
-    fetchRole().then(data => user.setRole(data))
+
+    getAllUsers().then(data => user.setUsers(data))
     
 
-    auth().then(data => {
-        user.setUser(true)
-        user.setIsAuth(true)
+    auth().then( data => {
+        user.setUser( {} ) 
+        user.setIsAuth( true )
+        user.setUsers([])
         
-  
-      }).finally(() => setLoading(false))
-    }, [user])
+        console.log(data)
+
+      } ).finally( () => setLoading( false ) )
+    }, [] )
 
  if (loading) {
     return <h1>LOADING</h1>
