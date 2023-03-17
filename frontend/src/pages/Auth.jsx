@@ -21,29 +21,26 @@ const Auth = observer(() => {
   const [userRole, setUserRole] = useState('')
 
 const click = async () => {
-   
-  try {
-    let data;
+  let data; 
+
+    
     if (isLogin) { 
       data = await login(email, password); 
       console.log(data)
       console.log(email, password)
       
     } else {
-      data = await signup(email, password, userRole) 
+      data = await signup(email, password, userRole)
+      console.log(data)
       navigate(LOGIN_ROUTE)
 
     }
-    user.setUser(user)
+    user.setUser(user.users)
     user.setIsAuth(true)
-    user.setUserRole(user)
+    user.setRole(user.roles)
 
     navigate(CALENDAR_ROUTE)
     
-    
-  } catch (e) {
-    alert (e.response.data.message)
-  }
 }
   
   

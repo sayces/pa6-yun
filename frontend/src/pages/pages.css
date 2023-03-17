@@ -245,6 +245,21 @@ div .form__auth__link a {
   top:20rem;
   backdrop-filter: blur(1rem);
   border-radius: 1rem;
+  font-size: 1.5rem
 }
 
+.calendar-info__form input {
+  margin: 1rem 0 ;
+  border-radius: 0.6rem;
+  background-color: transparent;
+  font-size: 1.5rem;
+
+}
+
+.calendar-info__form button {
+  margin: 1rem 0 ;
+  background-color: whitesmoke;
+  font-size: 1.5rem;
+  border-radius: 0.6rem;
+}
 

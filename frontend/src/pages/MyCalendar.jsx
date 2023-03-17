@@ -17,17 +17,17 @@ const MyCalendar = observer(() => {
   
   const {appoint} = useContext(Context)
   const {user} = useContext(Context)
-  console.log(user.users)
+  console.log(user)
   const [date, setDate] = useState('')
   
-  // const [userId, setUserId] = useState(
+  // const [userId, setUserId] = useState()
     
     
 
   
   
   useEffect(() => {
-    fetchUser().then(data => setUsers(data))
+    fetchUser().then(data => fetchUser(data))
 
       }, [])
 

@@ -5,11 +5,11 @@ import { CALENDAR_ROUTE } from '../utils/consts'
 function Profile() {
   return (
     <div className='page page__profile'>
-      <h1 className='wellcome'>добро пожаловать в профиль</h1>
       
-      <h1>мои записи:</h1>
       
-      <Link to={CALENDAR_ROUTE}>прошу к календарю</Link>
+      <h1>Профиль</h1>
+      
+      
     </div>
   )
 }
