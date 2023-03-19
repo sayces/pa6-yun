@@ -83,7 +83,6 @@ class UserController {
   
   async getAllUsers(req, res) {
 
-    // let {email, name, userRoleId} = req.body
     const users = await User.findAll()
     
     return res.json(users)

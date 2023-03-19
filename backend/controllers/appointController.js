@@ -3,24 +3,32 @@ const ApiError = require('../error/ApiError')
 
 class AppointController {
 
-  // async getMine(req, res) {}
-  
   async getAllAppoint(req, res) {
     const appoints = await Appointment.findAll()
     return res.json(appoints)
   }
-  
+
   async appoint(req, res) {
-    const {client, master, date, time, appointStatusId} = req.body
-    const appoint = await Appointment.create({client, master, date, time, appointStatusId})
-    
+    const { client, master, date, time, appointStatusId } = req.body
+    const appoint = await Appointment.create({ client, master, date, time, appointStatusId })
+
     return res.json(appoint)
-      
+
   }
 
-  // async updateAppint(req, res) {}
+  async findOneAppoint(req, res) {
+    const { id } = req.params
+    const { appoint } = await Appointment.findOne({ where: { id },  })
+    return res.json(appoint)
+  }
 
-  // async deleteDelete(req,res) {}
+  async deleteAppoint(req, res) {
+
+    const { id } = req.params
+    const { appoint } = await Appointment.destroy({ where: { id }})
+    return res.json(appoint)
+
+  }
 
 }
 

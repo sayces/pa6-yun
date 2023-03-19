@@ -15,7 +15,6 @@ const MyCalendar = observer(() => {
 
   const navigate = useNavigate();
 
-
   const { appoint } = useContext(Context)
   const { user } = useContext(Context)
 
@@ -24,22 +23,13 @@ const MyCalendar = observer(() => {
   const [master, setMaster] = useState('')
 
   let client = user.user.id
-  console.log()
-
   let masters = user.users.filter(u => u.userRoleId === 1)
   console.log(masters)
-  
 
   useEffect(() => {
 
     fetchAppoints().then(data => appoint.setAppoints(data))
     getAllUsers().then(data => user.setUsers(data))
-
-    
-    
-
-    
-    
 
     console.log(appoint.appoints)
 

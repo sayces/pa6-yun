@@ -30,7 +30,7 @@ const Appointment = sequelize.define('appointment', {
 
 const UserRole = sequelize.define('user_role', {
   id: {type: DataTypes.INTEGER,  primaryKey:true,  autoIncrement:true, onUpdate: 'CASCADE', onDelete:'CASCADE'},  
-  role: {type: DataTypes.STRING, unique: true, allowNull: false},
+  role: {type: DataTypes.STRING, unique: false, allowNull: false},
   },
 { 
   timestamps: false,
