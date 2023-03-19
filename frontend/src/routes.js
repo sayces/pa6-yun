@@ -11,8 +11,8 @@ import {
 import MyCalendar from "./pages/MyCalendar"
 import Gallery from "./pages/Gallery"
 import Profile from "./pages/Profile"
-import Login from "./pages/Auth"
-import Signup from "./pages/Auth"
+// import Login from "./pages/Auth"
+// import Signup from "./pages/Auth"
 import Auth from "./pages/Auth"
 import Native from './pages/Native.jsx'
 

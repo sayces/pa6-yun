@@ -11,16 +11,19 @@ export const fetchAppoints = async () => {
   
 }
 
-export const createAppoint = async ( { date, time, appointStatusId, userId } ) => {
+export const createAppoint = async ( {date, time, appointStatusId, client, master}  ) => {
   
-  const {data} = await $authHost.post('api/calendar/get',{userId, date, time, appointStatusId})
+  const {data} = await $authHost.post('api/calendar/get',{ date, time, appointStatusId, client, master})
   return data
 
 }
 
 export const deleteAppoint = async ( id ) => {
   
-  const {data} = await $authHost.delete('api/calendar/deleteAppoint',{id})
+  const {data} = await $authHost.delete('api/calendar/deleteAppoint', { id })
   return data
 
 }
+
+
+

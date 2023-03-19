@@ -21,7 +21,7 @@
   align-items: center;
   padding: 2rem;
   border-radius: 1rem;
-  border: .1rem solid rgb(187, 187, 187);
+  border: .1rem solid rgb(126, 0, 0);
   
 }
 
@@ -216,49 +216,142 @@ div .form__auth__link a {
 
 .calendar-info {
   justify-content: center;
-  width: 28rem;
+  width: 36rem;
   height: 28rem;
   flex-direction: column;
-  background: #a8a8a88f;
-  border: #D9D9D9 solid 0.4rem;
+  
+  
   display: flex;
   position: absolute;
   z-index: 9;
+  left: 0rem;
   padding:2rem;
   top:20rem;
-  left: 4rem;
+  
   backdrop-filter: blur(1rem);
+  background-color: rgba(22, 19, 19, 0.4);
+  
+  align-items: center;
+  padding: 2rem;
   border-radius: 1rem;
+  border: .1rem solid rgb(187, 187, 187);
+  
 }
 
 
 .calendar-info__form {
   justify-content: center;
-  width: 23rem;
-  height: 22rem;
+  width: 28rem;
+  height: 24rem;
   flex-direction: column;
-  background: #ffffff00;
-  box-shadow: 0 0 2rem rgba(34, 34, 34, 0.63);
+  background: #18161600;
   display: flex;
   z-index: 9;
   padding:2rem;
   top:20rem;
-  backdrop-filter: blur(1rem);
+  backdrop-filter: blur(0.1rem);
   border-radius: 1rem;
   font-size: 1.5rem
 }
 
+
+
 .calendar-info__form input {
   margin: 1rem 0 ;
-  border-radius: 0.6rem;
-  background-color: transparent;
+  border-radius: 0rem;
+  background-color: rgba(255, 255, 255, 0.685);
   font-size: 1.5rem;
+  padding: .4rem;
+  border: 0;
+  transition: all 0.4s;
+}
 
+.calendar-info__form input:focus {
+  margin: 1rem 0 ;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.685);
+  font-size: 1.5rem;
+  padding: 1rem;
+  border: 0;
+  transition: all 0.4s;
+}
+
+.calendar-info__form label {
+  margin: 1rem 0 ;
+  border-radius: 0.6rem;
+  font-size: 1.5rem;
+  justify-content: center;
+  box-shadow: 0;
+  color: #D9D9D9;
 }
 
 .calendar-info__form button {
   margin: 1rem 0 ;
-  background-color: whitesmoke;
+  border-radius: 0rem;
+  background-color: rgba(255, 255, 255, 0.685);
   font-size: 1.5rem;
-  border-radius: 0.6rem;
+  padding: .4rem;
+  border: 0;
+  transition: all 0.4s;
+}
+
+.calendar-info__form button:hover {
+  margin: 1rem 0 ;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 1.5rem;
+  padding: 1rem;
+  border: 1;
+  color: white;
+  border-color: #D9D9D9;
+  transition: all 0.4s;
+}
+
+.btn__radio__users {
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
+  left: 40rem;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+}
+
+.btn__radio__users label {
+  color: #D9D9D9;
+  width: 30rem;
+}
+
+.btn__radio__users button {
+  color: #D9D9D9;
+  width: 20rem;
+  height: 3rem;
+  background-color: #cf4e4e8f;
+}
+
+.btn__radio__users button:hover {
+  width: 20rem;
+  height: 3rem;
+  background: rgba(255, 99, 99, 1);
+  border-color: rgb(255, 235, 235) ;
+  color: black;
+  transition: all 0.4s;
+}
+
+.btn__radio__users button:checked  {
+  width: 20rem;
+  height: 3rem;
+  background: rgba(255, 205, 205, 0);
+  border-color: rgb(255, 120, 120) ;
+  color: black;
+  transition: all 0.4s;
+}
+
+.btn__radio__users button:focus  {
+  width: 20rem;
+  height: 3rem;
+  background: rgb(192, 109, 109, .2);
+  border-color: rgb(243, 243, 243) ;
+  color: rgb(253, 253, 253);
+  transition: all 0.4s;
 }

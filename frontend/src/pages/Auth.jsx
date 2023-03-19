@@ -77,7 +77,7 @@ const Auth = observer(() => {
           />
           
           <label >прошу, ваш пароль</label>
-          <input required={true} name="password" value={password} id="password"
+          <input required={true} type="password" name="password" value={password} id="password"
           onChange={e => setPassword(e.target.value)}
           />
           

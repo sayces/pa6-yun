@@ -3,15 +3,18 @@
   
   flex-direction: column;
   left: 4rem;
-  
+  z-index: 11rem;
   align-items: flex-end;
+  
 }
 
 .header-box__main {
   margin: 2rem 0 0 0;
   position: sticky;
+  
   top: 4rem;
   height: 30rem;
+  
 }
 
 .header-box a{

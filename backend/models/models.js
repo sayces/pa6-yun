@@ -1,5 +1,5 @@
 const sequelize = require('../db')
-const { DataTypes } =require('sequelize')
+const { DataTypes,  } = require('sequelize')
 
 
 // Таблицы
@@ -7,7 +7,7 @@ const User = sequelize.define('user', {
   id: {type: DataTypes.INTEGER, primaryKey:true, autoIncrement:true},
   email: {type: DataTypes.STRING, unique: true, allowNull: false},
   password: {type: DataTypes.STRING, allowNull: false},
-  name: {type: DataTypes.STRING, allowNull: true},
+  name: {type: DataTypes.STRING, allowNull: true}
   },  
 { 
   timestamps: false,
@@ -73,20 +73,20 @@ const GalleryPost = sequelize.define('gallery_post', {
 
 // Связи
 
-User.hasMany(Appointment)
-Appointment.belongsTo(User , {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+User.hasMany(Appointment, {foreignKey: 'master',  onDelete: "CASCADE", onUpdate: "CASCADE"})
+Appointment.belongsTo(User , {foreignKey: 'client'} )
 
-User.hasMany(UserReputation)
-UserReputation.belongsTo(User , {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+User.hasMany(UserReputation, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+UserReputation.belongsTo(User  )
 
-User.hasMany(GalleryPost)
-GalleryPost.belongsTo(User , {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+User.hasMany(GalleryPost, {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+GalleryPost.belongsTo(User )
 
-AppointmentStatus.hasMany(Appointment)
-Appointment.belongsTo(AppointmentStatus, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+AppointmentStatus.hasMany(Appointment, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+Appointment.belongsTo(AppointmentStatus)
 
-UserRole.hasMany(User)
-User.belongsTo(UserRole , {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+UserRole.hasMany(User, {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+User.belongsTo(UserRole )
 
 
 
