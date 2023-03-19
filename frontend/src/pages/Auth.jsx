@@ -33,32 +33,33 @@ const Auth = observer(() => {
     let data;
 
     try {
-
+    
     if (isLogin) { 
 
       data = await login( email, password ); 
 
-      console.log( user.user )
+      console.log( data )
 
-    } else {
+    } else { 
 
       data = await signup( email, password, userRole )
 
       navigate( LOGIN_ROUTE )
 
-      console.log( user.user )
+      console.log( data )
       
 
     }
     } catch(e) { alert ( e.promise.data.message ) }
     
-    user.setUser( user )
+    user.setUser( data )
     user.setIsAuth( true )
+
+    
 
     navigate(CALENDAR_ROUTE)
     
   }
-  
   
   return (
     <div className='page page__auth'>

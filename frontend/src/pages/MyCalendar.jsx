@@ -1,6 +1,6 @@
 
-import React, {useState, useContext , useEffect} from 'react';
-
+import React, { useState, useContext, useEffect } from 'react';
+import promise from "promise"
 
 import '../components/calendar.css';
 // import { CALENDAR_ROUTE } from '../utils/consts';
@@ -9,7 +9,7 @@ import '../components/calendar.css';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 
-import { getAllAppoints } from '../http/appointAPI';
+import { fetchAppoints, createAppoint } from '../http/appointAPI';
 // import { } from '../http/userAPI';
 
 
@@ -18,56 +18,69 @@ const MyCalendar = observer(() => {
 
   // const navigate = useNavigate();
 
-  
-  const {appoint} = useContext(Context)
-  const {user} = useContext(Context)
 
-  console.log(user)
-  console.log(appoint)
+  const { appoint } = useContext(Context)
+  const { user } = useContext(Context)
 
-  const [date, setDate] = useState(Date())
-  
-  // const [userId, setUserId] = useState()
-    
-    
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
 
   
-  
+
   useEffect(() => {
-
-    getAllAppoints().then(data => appoint.setAppoints(data))
-
-  }, [appoint])
-
-
-const click = async (e) => {
-   e.preventDefault()
-
-    // createAppoint({date: date, 
-    //   userId: user.users.id
-    // }).then(data => setDate(data))
-    // console.log(date)
     
-}
+    
+    fetchAppoints().then(data => appoint.setAppoints(data))
+
+    console.log( appoint )
+    console.log( user )
+
+  }, [appoint, user])
+
+
+  const click = async (e) => {
+    e.preventDefault()
+    
+    
+    const userId = user.user.id
+    
+    try {
+      
+      createAppoint({date: date, time: time, userId: userId, appointStatusId: 1})
+    } catch (e) {
+      
+      alert ( e.promise.data.message )
+    }
+    
+
+  }
 
   return (
-        <div className='page calendar-info'>
+    <div className='page calendar-info'>
 
-          <form className="calendar-info__form" action="POST" >
+      <form className="calendar-info__form" action="POST" >
 
-            <label>запланируйте дату</label>
-            <input 
-              onChange={e => setDate(e.target.value)}
-              type="datetime-local" value={date} 
-              />
-              
-            <button onClick={click}>записться</button>
-            
-          </form>
+        <label>запланируйте подходящее время</label>
 
-        </div>
-    
-  ); 
-  
+        <input
+          required='true'
+          onChange={e => setDate(e.target.value)}
+          type="date" value={date}
+        />
+
+        <input
+          required='true'
+          onChange={e => setTime(e.target.value)}
+          type="time" value={time}
+        />
+
+        <button onClick={click}>записться</button>
+
+      </form>
+
+    </div>
+
+  );
+
 })
 export default MyCalendar

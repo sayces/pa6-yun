@@ -25,11 +25,11 @@ export const auth = async () => {
   const {data} = await $authHost.get('api/user/auth')
   localStorage.setItem('token', data.token) 
   return jwt_decode(data.token)
-  
 }
 
 export const getAllUsers = async () => {
   const {data} = await $host.get('api/user/users')
+  localStorage.setItem('users', data)
   return data
 
 }
@@ -39,6 +39,8 @@ export const getAllRoles = async () => {
   return data
 
 }
+
+
 
 
 

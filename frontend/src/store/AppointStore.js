@@ -6,6 +6,7 @@ export default class AppointStore {
   constructor() {
 
     this._appoints = []
+    
 
     makeAutoObservable(this)
 

@@ -17,6 +17,7 @@
     "mobx": "^6.8.0",
     "mobx-react-lite": "^3.4.3",
     "observer": "^0.0.2",
+    "promise": "^8.3.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-calendar": "^4.0.0",

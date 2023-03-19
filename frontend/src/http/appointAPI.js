@@ -1,34 +1,26 @@
 
 import { 
-  // $authHost,
+  $authHost,
   $host 
   } from "./index";
 
-export const getAllAppoints = async () => {
+export const fetchAppoints = async () => {
 
   const {data} = await $host.get('api/calendar')
+  return data
+  
+}
+
+export const createAppoint = async ( { date, time, appointStatusId, userId } ) => {
+  
+  const {data} = await $authHost.post('api/calendar/get',{userId, date, time, appointStatusId})
   return data
 
 }
 
-// export const fetchAppoint = async () => {
+export const deleteAppoint = async ( id ) => {
   
-//   const {data} = await $host.get('api/calendar')
-//   return data
+  const {data} = await $authHost.delete('api/calendar/deleteAppoint',{id})
+  return data
 
-// }
-
-// export const deleteAppoint = async (appoint) => {
-  
-//   const {data} = await $authHost.delete('api/calendar', appoint)
-//   return data
-
-// }
-
-// export const changeAppoint = async (appoint) => {
-  
-//   const {data} = await $authHost.put('api/calendar', appoint)
-//   return data
-  
-// }
-
+}

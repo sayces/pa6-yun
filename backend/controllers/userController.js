@@ -88,9 +88,15 @@ class UserController {
     
     return res.json(users)
 
-}
-  
+  }
 
+  async getOne(req, res) {
+
+    const user = await User.findOne(
+      // {where: {id: {auth(res.user.id)}}}
+    )
+
+  }
 
 }
 

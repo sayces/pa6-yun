@@ -11,8 +11,8 @@ class AppointController {
   }
   
   async appoint(req, res) {
-    const {userId, date} = req.body
-    const appoint = await Appointment.create({userId, date})
+    const {userId, date, time, appointStatusId} = req.body
+    const appoint = await Appointment.create({userId, date, time, appointStatusId})
     
     return res.json(appoint)
       

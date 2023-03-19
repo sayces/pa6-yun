@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useState} from "react"
+import React, { useContext, useEffect, useState } from "react"
 import AppRouter from "./components/AppRouter"
 import { BrowserRouter } from 'react-router-dom';
 import NavBar from "./components/NavBar";
@@ -12,40 +12,41 @@ import { Context } from './index';
 
 
 const App = observer(() => {
-  const {user} = useContext(Context);
-  
+  const { user } = useContext(Context);
+
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-
+    
     getAllUsers().then(data => user.setUsers(data))
     getAllRoles().then(data => user.setRoles(data))
+    
+    auth().then(data => {
+      user.setUser( data )
+      user.setIsAuth(true)
 
-    auth().then( data => {
-        user.setUser( data ) 
-        user.setIsAuth( true )
-      
-        
-        console.log( data )
+      console.log( data )
 
-      } ).finally( () => setLoading( false ) )
-    }, [user] )
+    }).finally(() => setLoading(false))
+  }, [user])
 
- if (loading) {
+  
+
+  if (loading) {
     return <h1>LOADING</h1>
-    }
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar className="navbar"/>
+        <NavBar className="navbar" />
         <div className="center">
-          <Columns className="center__elem ui__columns"/>
-          <AppRouter className='center__elem app-router'/>
+          <Columns className="center__elem ui__columns" />
+          <AppRouter className='center__elem app-router' />
         </div>
       </BrowserRouter>
     </div>
-    
+
   )
 });
 
