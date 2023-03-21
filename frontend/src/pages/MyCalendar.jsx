@@ -37,7 +37,7 @@ const MyCalendar = observer(() => {
 
   
 
-  const click = async (e) => {
+  const deleteBtn = async (e) => {
 
     e.preventDefault()
 
