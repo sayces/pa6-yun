@@ -17,6 +17,7 @@ class AppointController {
   }
 
   async findOneAppoint(req, res) {
+    
     const { id } = req.params
     const { appoint } = await Appointment.findOne({ where: { id }, })
     return res.json(appoint)

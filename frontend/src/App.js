@@ -18,7 +18,7 @@ const App = observer(() => {
 
   useEffect(() => {
     
-    getAllUsers().then(data => user.setUsers(data))
+    try {getAllUsers().then(data => user.setUsers(data))
     getAllRoles().then(data => user.setRoles(data))
     
     auth().then(data => {
@@ -28,6 +28,9 @@ const App = observer(() => {
       console.log( data )
 
     }).finally(() => setLoading(false))
+  } catch (e) {
+    alert(e.promise.data.message)
+  }
   }, [user])
 
   

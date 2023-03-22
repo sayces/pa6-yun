@@ -107,7 +107,7 @@ const Auth = observer(() => {
           </div>
         </div>
         }
-        <div className='form__auth__link'>
+        <div className='form__auth--link'>
           <label>{isLogin ? 'новенький?' : 'старенький?'}</label>
           <Link className='form__auth-link' 
             to={isLogin ? SIGNUP_ROUTE : LOGIN_ROUTE}>

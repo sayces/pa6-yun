@@ -30,16 +30,16 @@ const Profile = observer(() => {
   // const [aState, setAState] = useState('')
 
   let currUser = user.user
-  let clientAppoints = appoint.appoints.filter( a => a.client === currUser.id )
+  let clientAppoints = appoint.appoints.filter( ca => ca.client === currUser.id )
+  // let masterAppoints = appoint.appoints.filter( ma => ma.master === currUser.id )
 
-  useEffect((e) => {
+  useEffect(() => {
 
     fetchAppoints().then(data => appoint.setAppoints(data))
     getAllUsers().then(data => user.setUsers(data))
 
     console.log(appoint.appoints)
-    console.log(e)
-      }, [appoint, user])
+    }, [appoint, user])
       
   const deleteAppoints = (e) => {
     
@@ -48,7 +48,7 @@ const Profile = observer(() => {
     try {
       deleteAppoint( {id: e } )
     } catch (e) {
-      alert(e.promise.data.message)
+      console.log(e.promise.data.message)
     }
 
   }
@@ -61,22 +61,22 @@ const Profile = observer(() => {
   
       <form className="calendar-info__form"
       onSubmit={e => e.preventDefault()}>
-      <h1>добро пожаловать, {currUser.email}</h1>
-      <h1>мои записи:</h1>
-      
+      <p>добро пожаловать, {currUser.email}</p>
+      <p>мои записи:</p>
+      <div className='appoint__list'>
       {
         
         clientAppoints.map( a => 
-        <div key={a.id}>
+        <div className='appoint__flex' key={a.id}>
           
-          <h1 >{a.date}</h1>
+          <input placeholder={a.date}/>
           <button value={a.id}  name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
           
         </div>
         )
         
       }
-      
+      </div>
       
       </form>
 

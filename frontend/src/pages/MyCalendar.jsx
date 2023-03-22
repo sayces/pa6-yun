@@ -26,6 +26,9 @@ const MyCalendar = observer(() => {
   let masters = user.users.filter(u => u.userRoleId === 1)
   console.log(masters)
 
+  
+  
+
   useEffect(() => {
 
     fetchAppoints().then(data => appoint.setAppoints(data))
@@ -35,24 +38,24 @@ const MyCalendar = observer(() => {
 
   }, [appoint, user, master, client])
 
-  
-
-  const deleteBtn = async (e) => {
+  const click = async (e) => {
 
     e.preventDefault()
-
+    if (master === '') {
+      console.log('master was not choosen')
+    }  else {
     try {
 
-      createAppoint({ date: date, time: time, master: Number(master), client: client, appointStatusId: 1 })
-
+      createAppoint( { date: date, time: time, master: Number(master), client: client, appointStatusId: 1 })
+      
     } catch (e) {
 
       alert(e.promise.data.message)
-
+      
     }
 
     navigate(PROFILE_ROUTE)
-
+  }
   }
 
   
@@ -60,8 +63,9 @@ const MyCalendar = observer(() => {
   return (
     <div className='page calendar-info'>
 
-      <form className="calendar-info__form"
+      <form required={true} className="calendar-info__form"
         onSubmit={e => e.preventDefault()}
+        name='get'
       >
 
         <label>запланируйте подходящее вам время</label>
@@ -71,22 +75,22 @@ const MyCalendar = observer(() => {
           onChange={e => setDate(e.target.value)}
           type="date" value={date}
         />
-
-        <input
-          required={true}
-          onChange={e => setTime(e.target.value)}
-          type="time" value={time}
-        />
+        
+          <input
+            required={true}
+            onChange={e => setTime(e.target.value)}
+            type="time" value={time}
+          />
 
       
 
-        <div className='btn__radio__users'>
+        <div className='btn__radio--users'>
           <label>выберите любимого мастера</label>
           
           {masters.map(u =>
 
-          <button className='btn__radio'
-            required={true} onClick={e => setMaster(e.target.value)}
+          <button className='btn__radio' form='get'
+            onClick={e => setMaster(e.target.value)}
             key={u.id} value={u.id} name='master'> {u.email} </button>
           
             )  
@@ -97,6 +101,7 @@ const MyCalendar = observer(() => {
         <button onClick={click}>записаться</button>
 
       </form>
+      
 
     </div>
 

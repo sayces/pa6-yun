@@ -18,9 +18,9 @@ export const createAppoint = async ({ date, time, appointStatusId, client, maste
 
 }
 
-export const deleteAppoint = async ({ id }) => {
+export const deleteAppoint = async ( {id} ) => {
 
-  const { data } = await $authHost.delete(`api/calendar/appoint/delete/` + `${id}`)
+  const { data } = await $authHost.delete(`api/calendar/appoint/delete/` + id)
   return data
 
 }

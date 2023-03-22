@@ -74,18 +74,19 @@ const GalleryPost = sequelize.define('gallery_post', {
 // Связи
 
 User.hasMany(Appointment, {foreignKey: 'master',  onDelete: "CASCADE", onUpdate: "CASCADE"})
-Appointment.belongsTo(User , {foreignKey: 'client'} )
+Appointment.belongsTo(User  )
+User.hasMany(Appointment, {foreignKey: 'client'})
 
-User.hasMany(UserReputation, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+User.hasMany(UserReputation, )
 UserReputation.belongsTo(User  )
 
-User.hasMany(GalleryPost, {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+User.hasMany(GalleryPost,  )
 GalleryPost.belongsTo(User )
 
-AppointmentStatus.hasMany(Appointment, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+AppointmentStatus.hasMany(Appointment,)
 Appointment.belongsTo(AppointmentStatus)
 
-UserRole.hasMany(User, {onDelete: "CASCADE", onUpdate: "CASCADE"} )
+UserRole.hasMany(User )
 User.belongsTo(UserRole )
 
 
