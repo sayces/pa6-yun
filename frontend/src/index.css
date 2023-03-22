@@ -3,9 +3,7 @@ html, body {
   background: #1E1E1E;
   
   font-family: 'Montserrat Alternates', sans-serif;
-  font-weight: 700;
-
-  
+  font-weight: 700;  
 }
 
 
@@ -17,6 +15,24 @@ html, body {
   -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
+
+*:focus-visible{
+  outline: none;
+  outline-style: none;
+}
+
+*:focus-within{
+  outline: none;
+  outline-style: none;
+}
+
+*:focus {
+  outline: none;
+  outline-style: none;
+}
+
+
+
 
 
 body, html:focus {

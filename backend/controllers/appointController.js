@@ -30,6 +30,16 @@ class AppointController {
     return res.json(appoint)
 
   }
+  
+  async editAppointStatus(req, res) {
+    
+    const { appointStatusId } = req.body
+    const { id } = req.params
+    const { appoint } = await Appointment.update({ appointStatusId: {appointStatusId}}, {where: { id }})
+    return res.json(appoint)
+
+  }
+  
 
 }
 

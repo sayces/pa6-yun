@@ -14,7 +14,7 @@ import './pages.css';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 
-import { fetchAppoints, deleteAppoint } from '../http/appointAPI';
+import { fetchAppoints, deleteAppoint, updateAppointStatus } from '../http/appointAPI';
 import { getAllUsers } from '../http/userAPI'
 
 
@@ -42,16 +42,31 @@ const Profile = observer(() => {
     }, [appoint, user])
       
   const deleteAppoints = (e) => {
-    
-    
-    
+      
     try {
       deleteAppoint( {id: e } )
+      e.preventDefault()
     } catch (e) {
       console.log(e.promise.data.message)
     }
+  } 
 
+  const oneClick = (e) => {
+    e.preventDefault()
+    try {
+      updateAppointStatus( {
+        id: e, 
+        appointStatusId: 2 
+      } )
+      
+      
+    } catch (e) {
+      console.log(e.promise.data.message)
+    }
+    
   }
+
+  
 
   
 
@@ -60,18 +75,24 @@ const Profile = observer(() => {
       
   
       <form className="calendar-info__form"
-      onSubmit={e => e.preventDefault()}>
+      // onSubmit={}
+      >
       <p>добро пожаловать, {currUser.email}</p>
-      <p>мои записи:</p>
+      <p>{user.userRoleId === 2 ? 'назначенные сеансы' : 'мои записи'}</p>
       <div className='appoint__list'>
       {
         
         clientAppoints.map( a => 
         <div className='appoint__flex' key={a.id}>
           
-          <input placeholder={a.date}/>
-          <button value={a.id}  name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
-          
+          <input id={a.id} placeholder={a.date}/>
+          <button className='appoint__delete-btn' value={a.id}  name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
+          <button className='appoint__update-btn' value={a.id}  name='update' 
+          // onDoubleClick={e => doubleClick(e=2)} 
+          onClick={(e) => oneClick(e.taget.value)}
+          > 
+          upd 
+          </button>
         </div>
         )
         

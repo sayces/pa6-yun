@@ -24,48 +24,54 @@ const Auth = observer(() => {
   
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userRole, setUserRole] = useState('')
+  const [userRole, setUserRole] = useState('2')
 
 
 
-  const click = async () => {
+  const click = async (e) => {
 
     let data;
 
+    
     try {
-    
-    if (isLogin) { 
-
-      data = await login( email, password ); 
-
-      console.log( data )
-
-    } else { 
-
-      data = await signup( email, password, userRole )
-
-      navigate( LOGIN_ROUTE )
-
-      console.log( data )
       
+      if (isLogin && email !== '' && password !== '') {
+        
+        data = await login( email, password ); 
+        console.log( data )
+        user.setUser( data )
+        user.setIsAuth( true )
+        
+        navigate(CALENDAR_ROUTE)
+        
+      } else if (!isLogin && email !== '' && password !== '' && userRole !== '') {
+        
+        data = await signup( email, password, userRole )
+        navigate( LOGIN_ROUTE )
+        console.log( data )
+        
+        
+      } else { 
 
-    }
-    } catch(e) { alert ( e.promise.data.message ) }
+      console.log('no data : auth')
+
+      }
     
-    user.setUser( data )
-    user.setIsAuth( true )
+       } catch(e) { alert ( e.promise.data.message ) }
+
+     
+    
 
     
 
-    navigate(CALENDAR_ROUTE)
+    
     
   }
   
   return (
     <div className='page page__auth'>
-      <form className="form__auth" 
-      
-      onSubmit={e => e.preventDefault()}
+      <form className="form__auth"
+      onSubmit={e => e.preventDefault()} 
       >
 
 
@@ -94,20 +100,20 @@ const Auth = observer(() => {
           
           <label>выберите свою роль</label>
           
-          <div className='form__auth__radio'>
+          <div className='form__auth--radio'>
           {user.roles.map(role => 
            
             <button className='btn__radio' 
-            required={true} onClick={e => setUserRole(e.target.value)} 
+            onClick={e => setUserRole(e.target.value)} 
             key={role.id} value={role.id} name='role'>{role.role}</button>
             
             
           ) }   
-          
+          <p style={{color: 'grey'}}>[по умолчанию]</p>
           </div>
         </div>
         }
-        <div className='form__auth--link'>
+        <div className='form__auth--links'>
           <label>{isLogin ? 'новенький?' : 'старенький?'}</label>
           <Link className='form__auth-link' 
             to={isLogin ? SIGNUP_ROUTE : LOGIN_ROUTE}>
@@ -116,7 +122,7 @@ const Auth = observer(() => {
         </div>
        
        
-       <button onClick={click}>{isLogin ? 'войти' : 'создать'}</button>
+       <button className='form__auth--submit-btn' onClick={click}>{isLogin ? 'войти' : 'создать'}</button>
       </form>
       
     </div>

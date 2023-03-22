@@ -40,24 +40,27 @@ const MyCalendar = observer(() => {
 
   const click = async (e) => {
 
-    e.preventDefault()
-    if (master === '') {
-      console.log('master was not choosen')
-    }  else {
-    try {
-
-      createAppoint( { date: date, time: time, master: Number(master), client: client, appointStatusId: 1 })
+    
+    if (master !== '' && date !== '' && time !== '') {
       
-    } catch (e) {
+      try {
 
+        e.preventDefault()
+        createAppoint( { date: date, time: time, master: Number(master), client: client, appointStatusId: 1 })
+        navigate(PROFILE_ROUTE)
+        
+      } catch (e) {
       alert(e.promise.data.message)
+      }
+
+    } else {
       
+      console.log("no data : caendar")
+    
     }
 
-    navigate(PROFILE_ROUTE)
+  
   }
-  }
-
   
 
   return (
@@ -85,7 +88,9 @@ const MyCalendar = observer(() => {
       
 
         <div className='btn__radio--users'>
-          <label>выберите любимого мастера</label>
+
+          
+          <label>{ masters.length === 0 ? 'мастеров на данный момент нету' : 'выберите любимого мастерa'}</label>
           
           {masters.map(u =>
 
