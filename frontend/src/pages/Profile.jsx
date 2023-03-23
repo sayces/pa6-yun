@@ -14,7 +14,7 @@ import './pages.css';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 
-import { fetchAppoints, deleteAppoint, updateAppointStatus } from '../http/appointAPI';
+import { fetchAppoints, deleteAppoint, editAppointStatus } from '../http/appointAPI';
 import { getAllUsers } from '../http/userAPI'
 
 
@@ -29,9 +29,16 @@ const Profile = observer(() => {
 
   // const [aState, setAState] = useState('')
 
-  let currUser = user.user
-  let clientAppoints = appoint.appoints.filter( ca => ca.client === currUser.id )
-  // let masterAppoints = appoint.appoints.filter( ma => ma.master === currUser.id )
+  let currUser = user.users.filter(u => u.id === user.user.id  )
+  let clientAppoints = appoint.appoints.filter( ca => ca.client === currUser[0].id )
+  let masterAppoints = appoint.appoints.filter( ma => ma.master === currUser[0].id )
+
+  console.log(`userrole ` + currUser[0].userRoleId)
+  console.log(`userid ` + currUser[0].id)
+  console.log(clientAppoints)
+  console.log(masterAppoints)
+  
+  
 
   useEffect(() => {
 
@@ -42,28 +49,32 @@ const Profile = observer(() => {
     }, [appoint, user])
       
   const deleteAppoints = (e) => {
-      
+    
     try {
-      deleteAppoint( {id: e } )
-      e.preventDefault()
+      
+      deleteAppoint({id: e}  )
+      
     } catch (e) {
       console.log(e.promise.data.message)
     }
+    e.preventDefault()
   } 
 
   const oneClick = (e) => {
-    e.preventDefault()
+    console.log(e)
+    
     try {
-      updateAppointStatus( {
-        id: e, 
-        appointStatusId: 2 
-      } )
       
+      editAppointStatus( 
       
+        { appointStatusId: 2 }, {id: e}
+      )    
+      
+      console.log(appoint.appointStatusId)
     } catch (e) {
       console.log(e.promise.data.message)
     }
-    
+    e.preventDefault()
   }
 
   
@@ -75,28 +86,49 @@ const Profile = observer(() => {
       
   
       <form className="calendar-info__form"
-      // onSubmit={}
+      // onSubmit={e => e.preventDefault()}
       >
-      <p>добро пожаловать, {currUser.email}</p>
-      <p>{user.userRoleId === 2 ? 'назначенные сеансы' : 'мои записи'}</p>
+      <p>добро пожаловать, {currUser[0].email}</p>
+      <p>{currUser[0].userRoleId === 1 ? 'назначенные сеансы' : 'мои записи'}</p>
       <div className='appoint__list'>
-      {
-        
-        clientAppoints.map( a => 
-        <div className='appoint__flex' key={a.id}>
-          
-          <input id={a.id} placeholder={a.date}/>
-          <button className='appoint__delete-btn' value={a.id}  name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
-          <button className='appoint__update-btn' value={a.id}  name='update' 
-          // onDoubleClick={e => doubleClick(e=2)} 
-          onClick={(e) => oneClick(e.taget.value)}
-          > 
-          upd 
-          </button>
-        </div>
-        )
-        
-      }
+            {
+              
+              currUser[0].id !== appoint.appoints.master ?
+                
+                masterAppoints.map(a =>
+                    
+                      <div className='appoint__flex' key={a.id}>
+                      
+                      <input id={a.id} placeholder={a.date} value={a.date} type='date' readOnly={true} />
+                      <input id={a.id} placeholder={a.time} value={a.time} type='time' readOnly={true} />
+                      <button className='appoint__delete-btn' value={a.id} name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
+                      {currUser[0].userRoleId === 1 ? <button className='appoint__update-btn' value={a.id} name='update'
+                        onClick={e => oneClick(e.target.value)}
+                      > upd </button> : null}
+                    </div> 
+                  )
+                :  
+                  clientAppoints.map(a =>
+                    
+                    <div className='appoint__flex' key={a.id}>
+                      
+                      <input id={a.id} placeholder={a.date} value={a.date} type='date' readOnly={true} />
+                      <input id={a.id} placeholder={a.time} value={a.time} type='time' readOnly={true} />
+                      <button className='appoint__delete-btn' value={a.id} name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
+                      
+                    </div>
+                  )
+            }
+            {clientAppoints.map(a =>
+                    
+                    <div className='appoint__flex' key={a.id}>
+                      
+                      <input id={a.id} placeholder={a.date} value={a.date} type='date' readOnly={true} />
+                      <input id={a.id} placeholder={a.time} value={a.time} type='time' readOnly={true} />
+                      <button className='appoint__delete-btn' value={a.id} name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
+                    
+                    </div>
+                  )}
       </div>
       
       </form>

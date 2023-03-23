@@ -1,3 +1,10 @@
 {
-  "recommendations": []
+  "recommendations": [
+    "cmstead.jsrefactor",
+    "skyran.js-jsx-snippets",
+    "angelorafael.jsx-html-tags",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "ms-ceintl.vscode-language-pack-ru"
+  ]
 }

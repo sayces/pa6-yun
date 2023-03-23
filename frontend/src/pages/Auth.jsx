@@ -109,7 +109,7 @@ const Auth = observer(() => {
             
             
           ) }   
-          <p style={{color: 'grey'}}>[по умолчанию]</p>
+          <p style={{color: 'grey'}}>[по-умолчанию]</p>
           </div>
         </div>
         }

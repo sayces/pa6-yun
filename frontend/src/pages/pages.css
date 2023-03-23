@@ -5,7 +5,7 @@
   width: 36rem;
   height: 28rem;
   top: 20rem;
-  backdrop-filter: blur(0.15rem transition all);
+  /* backdrop-filter: blur(1rem transition all); */
   justify-content: center;
   align-items: center;
   display: flex;
@@ -243,8 +243,8 @@ div .form__auth__link a {
   padding:2rem;
   
   
-  backdrop-filter: blur(1rem);
-  background-color: rgba(22, 19, 19, 0.4);
+  backdrop-filter: blur(0.2rem);
+  background: rgba(22, 19, 19, 0.4);
   
   align-items: center;
   padding: 2rem;
@@ -264,22 +264,39 @@ div .form__auth__link a {
   
   padding:2rem;
   position: relative;
-  backdrop-filter: blur(0.1rem);
+  backdrop-filter: blur(0.2rem);
   border-radius: 1rem;
   font-size: 1.5rem;
   align-items: center;
 }
 
-
+.calendar-info__form p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  margin: 0.5rem 0 ;
+  border-radius: 0rem;
+  
+  font-size: 1.5rem;
+  padding: .4rem;
+  border: 0.6rem;
+  transition: all 0.4s;
+  width: 28rem;
+  color:#d6d6d6;
+  text-shadow: 0px 5px 10px #000000;
+}
 
 .calendar-info__form input {
+  
   margin: 1rem 0 ;
   border-radius: 0rem;
   background-color: rgba(255, 255, 255, 0.685);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   padding: .4rem;
   border: 0;
   transition: all 0.4s;
+  width: 20rem;
 }
 
 .calendar-info__form input:focus {
@@ -290,10 +307,14 @@ div .form__auth__link a {
   padding: 1rem;
   border: 0;
   transition: all 0.4s;
+  width: 22rem;
 }
 
 .calendar-info__form label {
   margin: 1rem 0 ;
+  display: flex;
+  align-items: center;
+  
   border-radius: 0.6rem;
   font-size: 1.5rem;
   justify-content: center;
@@ -420,7 +441,7 @@ div .form__auth__link a {
    font-size: 2rem;
    height: 3rem;
    margin: 0;
-   width: 22rem;
+   width: 14rem;
    
 }
 
@@ -428,7 +449,7 @@ div .form__auth__link a {
    font-size: 2rem;
    height: 3rem;
    margin: 0;
-   width: 22rem;
+   width: 16rem;
    border-radius: 0;
    
 }

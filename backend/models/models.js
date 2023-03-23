@@ -12,51 +12,51 @@ const User = sequelize.define('user', {
 { 
   timestamps: false,
   freezeTableName: true,
-  alter: true
+
 })
 
 const Appointment = sequelize.define('appointment', {
-  id: {type: DataTypes.INTEGER, primaryKey:true,  autoIncrement:true, onUpdate: 'CASCADE', onDelete:'CASCADE'},
-  date: {type: DataTypes.DATEONLY ,unique: false, allowNull: false, onUpdate: 'CASCADE', onDelete:'CASCADE'},
-  time: {type: DataTypes.TIME ,unique: false, allowNull: false, onUpdate: 'CASCADE', onDelete:'CASCADE'},
+  id: {type: DataTypes.INTEGER, primaryKey:true,  autoIncrement:true, },
+  date: {type: DataTypes.DATEONLY ,unique: false, allowNull: false,},
+  time: {type: DataTypes.TIME ,unique: false, allowNull: false,},
   },
 { 
   updatedAt: false,
   createdAt: true,
   freezeTableName: true,
-  alter: true
+
 })
 
 
 const UserRole = sequelize.define('user_role', {
-  id: {type: DataTypes.INTEGER,  primaryKey:true,  autoIncrement:true, onUpdate: 'CASCADE', onDelete:'CASCADE'},  
+  id: {type: DataTypes.INTEGER,  primaryKey:true,  autoIncrement:true},  
   role: {type: DataTypes.STRING, unique: false, allowNull: false},
   },
 { 
   timestamps: false,
   freezeTableName: true,
-  alter: true
+
 })
 
 const AppointmentStatus = sequelize.define('appoint_status', {
-  id: {type: DataTypes.INTEGER,  primaryKey:true, autoIncrement:true, onUpdate: 'CASCADE', onDelete: 'CASCADE'},  
+  id: {type: DataTypes.INTEGER,  primaryKey:true, autoIncrement:true},  
   status: {type: DataTypes.STRING, allowNull: false},
   },
 { 
   timestamps: false,
   freezeTableName: true,
-  alter: true
+
 })
 
 const UserReputation = sequelize.define('user_reputation', {
-  id: {type: DataTypes.INTEGER, primaryKey:true , autoIncrement:true ,onUpdate: 'CASCADE', onDelete: 'CASCADE'}, 
+  id: {type: DataTypes.INTEGER, primaryKey:true , autoIncrement:true }, 
   
-  reputation: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0, },
+  // reputation: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0, },
   },
 { 
   timestamps: false,
   freezeTableName: true,
-  alter: true
+
 })
 
 const GalleryPost = sequelize.define('gallery_post', {
@@ -68,14 +68,13 @@ const GalleryPost = sequelize.define('gallery_post', {
 { 
   timestamps: false,
   freezeTableName: true,
-  alter: true
+
 })
 
 // Связи
 
 User.hasMany(Appointment, {foreignKey: 'master',  onDelete: "CASCADE", onUpdate: "CASCADE"})
-Appointment.belongsTo(User  )
-User.hasMany(Appointment, {foreignKey: 'client'})
+Appointment.belongsTo(User , {foreignKey: 'client'} )
 
 User.hasMany(UserReputation, )
 UserReputation.belongsTo(User  )

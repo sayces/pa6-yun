@@ -11,23 +11,23 @@ export const fetchAppoints = async () => {
 
 }
 
-export const createAppoint = async ( { date, time, appointStatusId, client, master } ) => {
+export const createAppoint = async ({ date, time, appointStatusId, client, master }) => {
 
-  const { data } = await $authHost.post('api/calendar/get', { date, time, appointStatusId, client, master } )
+  const { data } = await $authHost.post('api/calendar/get', { date, time, appointStatusId, client, master })
   return data
 
 }
 
-export const deleteAppoint = async ( {id} ) => {
+export const deleteAppoint = async ({ id }) => {
 
-  const { data } = await $authHost.delete(`api/calendar/appoint/delete/` + id)
+  const { data } = await $authHost.delete('api/calendar/appoint/delete/' + id)
   return data
 
 }
 
-export const updateAppointStatus = async ( {id, appointStatusId} ) => {
-  
-  const { data } = await $authHost.put(`api/calendar/appoint/update/` + id, {appointStatusId})
+export const editAppointStatus = async (appoint, { id }) => {
+
+  const { data } = await $authHost.put('api/calendar/appoint/update/' + id, appoint.appointStatusId)
   return data
 
 }

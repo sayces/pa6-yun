@@ -1,4 +1,8 @@
 {
   "files.autoSave": "onFocusChange",
-  "editor.cursorStyle": "line"
+  "editor.cursorStyle": "line",
+  "cSpell.words": [
+    "message"
+  ],
+  "cSpell.language": "en,ru"
 }

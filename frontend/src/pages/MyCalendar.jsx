@@ -55,7 +55,7 @@ const MyCalendar = observer(() => {
 
     } else {
       
-      console.log("no data : caendar")
+      console.log("no data : calendar")
     
     }
 
@@ -71,7 +71,8 @@ const MyCalendar = observer(() => {
         name='get'
       >
 
-        <label>запланируйте подходящее вам время</label>
+        <p>запланируйте</p>
+        <p>подходящее вам время</p>
 
         <input
           required={true}
@@ -79,11 +80,11 @@ const MyCalendar = observer(() => {
           type="date" value={date}
         />
         
-          <input
-            required={true}
-            onChange={e => setTime(e.target.value)}
-            type="time" value={time}
-          />
+        <input
+          required={true}
+          onChange={e => setTime(e.target.value)}
+          type="time" value={time}
+        />
 
       
 
