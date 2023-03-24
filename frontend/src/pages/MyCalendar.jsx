@@ -22,10 +22,13 @@ const MyCalendar = observer(() => {
   const [time, setTime] = useState('')
   const [master, setMaster] = useState('')
 
-  let client = user.user.id
-  let masters = user.users.filter(u => u.userRoleId === 1)
+  let masters = user.users.filter( u => u.userRoleId === 1)
   console.log(masters)
+  let currUser = user.users.filter(u => u.id === user.user.id)
+  
 
+  const notUserRole = user.users.filter(u => u.id !== currUser[0].id && u.userRoleId === 1)
+  console.log(notUserRole)
   
   
 
@@ -36,7 +39,7 @@ const MyCalendar = observer(() => {
 
     console.log(appoint.appoints)
 
-  }, [appoint, user, master, client])
+  }, [appoint, user, master])
 
   const click = async (e) => {
 
@@ -46,7 +49,7 @@ const MyCalendar = observer(() => {
       try {
 
         e.preventDefault()
-        createAppoint( { date: date, time: time, master: Number(master), client: client, appointStatusId: 1 })
+        createAppoint( { date: date, time: time, master: Number(master), client: currUser[0].id, appointStatusId: 1 })
         navigate(PROFILE_ROUTE)
         
       } catch (e) {
@@ -91,16 +94,19 @@ const MyCalendar = observer(() => {
         <div className='btn__radio--users'>
 
           
-          <label>{ masters.length === 0 ? 'мастеров на данный момент нету' : 'выберите любимого мастерa'}</label>
+          <label>{ !masters ? 'мастеров на данный момент нету' : 'выберите любимого мастерa'}</label>
+          {
+            
+            notUserRole.map(u =>
+            
+              <button className='btn__radio' form='get'
+                onClick={e => setMaster(e.target.value)}
+                key={u.id} value={u.id} name='master'> {u.email} </button>
+            
+            )
           
-          {masters.map(u =>
-
-          <button className='btn__radio' form='get'
-            onClick={e => setMaster(e.target.value)}
-            key={u.id} value={u.id} name='master'> {u.email} </button>
-          
-            )  
           }
+          
         </div>
         
 

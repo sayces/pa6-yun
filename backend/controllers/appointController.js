@@ -55,16 +55,16 @@ class AppointController {
       const { id } = req.params
       const { appointStatusId } = req.body
       if (!id || !appointStatusId) {
-        return res.json({ message: 'cant find id' })
+        return res.status(400).json(e)
       }
       const findAppoint = await Appointment.findOne({ where: { id } })
       if (!findAppoint) {
-        return res.json({ message: 'cant find post by id' })
+        return res.status(400).json(e)
       }
-      const updateAppoint = await Appointment.update(findAppoint, { appointStatusId })
+      const updateAppoint = await Appointment.update({ findAppoint }, { appointStatusId })
 
       if (!updateAppoint) {
-        return res.json({ message: 'cant find post' })
+        return res.status(400).json(e)
       }
 
 
