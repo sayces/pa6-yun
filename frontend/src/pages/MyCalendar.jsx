@@ -24,11 +24,11 @@ const MyCalendar = observer(() => {
 
   let masters = user.users.filter(u => u.userRoleId === 1)
   console.log(masters)
+  let currUser = user.users.filter(u => u.id === user.user.id)
 
-  let currUser = user.users.filter(u => u.id === user.user.id)[0]
 
-  let usersNotCurrRole = user.users.filter(u => u.id !== currUser.id);
-  console.log(usersNotCurrRole)
+  const notUserRole = user.users.filter(u => u.id !== currUser[0].id && u.userRoleId === 1)
+  console.log(notUserRole)
 
 
 
@@ -43,6 +43,7 @@ const MyCalendar = observer(() => {
 
   const click = async (e) => {
 
+
     if (master !== '' && date !== '' && time !== '') {
 
       try {
@@ -53,13 +54,14 @@ const MyCalendar = observer(() => {
 
       } catch (e) {
         alert(e.promise.data.message)
-      } 0
+      }
 
     } else {
 
       console.log("no data : calendar")
 
     }
+
 
   }
 
@@ -92,24 +94,14 @@ const MyCalendar = observer(() => {
         <div className='btn__radio--users'>
 
 
-          <label>
-
-            {!masters && usersNotCurrRole ?
-              'мастеров на данный момент нету'
-              :
-              'выберите любимого мастера'
-            }
-
-          </label>
+          <label>{!masters ? 'мастеров на данный момент нету' : 'выберите любимого мастерa'}</label>
           {
 
-            usersNotCurrRole.map(u =>
+            notUserRole.map(u =>
 
               <button className='btn__radio' form='get'
                 onClick={e => setMaster(e.target.value)}
-                key={u.id} value={u.id} name='master'>
-                {u.email}
-              </button>
+                key={u.id} value={u.id} name='master'> {u.email} </button>
 
             )
 
