@@ -22,15 +22,15 @@ const MyCalendar = observer(() => {
   const [time, setTime] = useState('')
   const [master, setMaster] = useState('')
 
-  let masters = user.users.filter( u => u.userRoleId === 1)
+  let masters = user.users.filter(u => u.userRoleId === 1)
   console.log(masters)
-  let currUser = user.users.filter(u => u.id === user.user.id)
-  
 
-  const notUserRole = user.users.filter(u => u.id !== currUser[0].id && u.userRoleId === 1)
-  console.log(notUserRole)
-  
-  
+  let currUser = user.users.filter(u => u.id === user.user.id)[0]
+
+  let usersNotCurrRole = user.users.filter(u => u.id !== currUser.id);
+  console.log(usersNotCurrRole)
+
+
 
   useEffect(() => {
 
@@ -43,28 +43,26 @@ const MyCalendar = observer(() => {
 
   const click = async (e) => {
 
-    
     if (master !== '' && date !== '' && time !== '') {
-      
+
       try {
 
         e.preventDefault()
-        createAppoint( { date: date, time: time, master: Number(master), client: currUser[0].id, appointStatusId: 1 })
+        createAppoint({ date: date, time: time, master: Number(master), client: currUser[0].id, appointStatusId: 1 })
         navigate(PROFILE_ROUTE)
-        
+
       } catch (e) {
-      alert(e.promise.data.message)
-      }
+        alert(e.promise.data.message)
+      } 0
 
     } else {
-      
+
       console.log("no data : calendar")
-    
+
     }
 
-  
   }
-  
+
 
   return (
     <div className='page calendar-info'>
@@ -82,38 +80,48 @@ const MyCalendar = observer(() => {
           onChange={e => setDate(e.target.value)}
           type="date" value={date}
         />
-        
+
         <input
           required={true}
           onChange={e => setTime(e.target.value)}
           type="time" value={time}
         />
 
-      
+
 
         <div className='btn__radio--users'>
 
-          
-          <label>{ !masters ? 'мастеров на данный момент нету' : 'выберите любимого мастерa'}</label>
+
+          <label>
+
+            {!masters && usersNotCurrRole ?
+              'мастеров на данный момент нету'
+              :
+              'выберите любимого мастера'
+            }
+
+          </label>
           {
-            
-            notUserRole.map(u =>
-            
+
+            usersNotCurrRole.map(u =>
+
               <button className='btn__radio' form='get'
                 onClick={e => setMaster(e.target.value)}
-                key={u.id} value={u.id} name='master'> {u.email} </button>
-            
+                key={u.id} value={u.id} name='master'>
+                {u.email}
+              </button>
+
             )
-          
+
           }
-          
+
         </div>
-        
+
 
         <button onClick={click}>записаться</button>
 
       </form>
-      
+
 
     </div>
 

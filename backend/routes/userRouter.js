@@ -1,3 +1,4 @@
+
 const Router = require('express')
 const router = new Router()
 const userController = require('../controllers/userController')
@@ -11,6 +12,5 @@ router.get('/auth', authMiddleware, userController.auth)
 
 router.get('/users', userController.getAllUsers)
 router.get('/roles', roleController.getAllRoles)
-
 
 module.exports = router

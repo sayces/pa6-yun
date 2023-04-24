@@ -17,23 +17,24 @@ const App = observer(() => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    
-    try {getAllUsers().then(data => user.setUsers(data))
-    getAllRoles().then(data => user.setRoles(data))
-    
-    auth().then(data => {
-      user.setUser( data )
-      user.setIsAuth(true)
 
-      console.log( data )
+    try {
+      getAllUsers().then(data => user.setUsers(data))
+      getAllRoles().then(data => user.setRoles(data))
 
-    }).finally(() => setLoading(false))
-  } catch (e) {
-    alert(e.promise.data.message)
-  }
+      auth().then(data => {
+        user.setUser(data)
+        user.setIsAuth(true)
+
+        console.log(data)
+
+      }).finally(() => setLoading(false))
+    } catch (e) {
+      alert(e.promise.data.message)
+    }
   }, [user])
 
-  
+
 
   if (loading) {
     return <h1>LOADING</h1>
