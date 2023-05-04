@@ -3,7 +3,6 @@ import React, { useContext, useState } from 'react'
 import { Link, useLocation, useNavigate} from 'react-router-dom'
 import { observer } from 'mobx-react-lite';
 
-import 'react-bootstrap'
 import './pages.css';
 
 import { CALENDAR_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE } from '../utils/consts';
