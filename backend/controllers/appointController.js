@@ -1,12 +1,15 @@
-const { Appointment, User } = require('../models/models')
+
+const { Appointment, AppointmentStatus } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class AppointController {
 
-
-
   async getAllAppoint(req, res) {
-    const appoints = await Appointment.findAll()
+    const appoints = await Appointment.findAll({
+      include: {
+        model: AppointmentStatus
+      }
+    })
     return res.json(appoints)
   }
 
@@ -17,7 +20,6 @@ class AppointController {
     const appoint = await Appointment.create({ client, master, date, time, appointStatusId })
 
     return res.json(appoint)
-
 
   }
 
@@ -49,21 +51,18 @@ class AppointController {
 
   }
 
-  async editAppointStatus(req, res) {
+  async editAppoint(req, res) {
 
     try {
 
       const { id } = req.params
-      const { appointStatusId } = req.body
-      console.log(id, appointStatusId)
-      if (!id || !appointStatusId) {
+      const data = req.body
+      console.log(req.params, req.body)
+
+      if (!req.params || !req.body) {
         return res.status(400).json({ message: "no id or statusid" })
       }
-      const findAppoint = await Appointment.findOne({ where: { id } })
-      if (!findAppoint) {
-        return res.status(400).json({ message: "aint find" })
-      }
-      const updateAppoint = await Appointment.update({ findAppoint }, { appointStatusId })
+      const updateAppoint = await Appointment.update(data, { where: { id } })
 
       if (!updateAppoint) {
         return res.status(400).json({ message: "aint update" })
@@ -72,11 +71,20 @@ class AppointController {
       return res.json(updateAppoint);
     } catch (e) {
       return res.status(400).json(e)
-
     }
-
   }
 
+  // async 
+
+  //   Posts.findAll({
+  //     where: { name: "Sunshine"},
+  //     include: [{
+  //       model: User,
+  //       where: ["year_birth = post_year"]
+  //   }]
+  // }).then(posts => {
+  //   /* ... */
+  // });
 
 }
 

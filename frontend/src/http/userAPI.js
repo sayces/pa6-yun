@@ -25,14 +25,14 @@ export const auth = async () => {
   return jwt_decode(data.token)
 }
 
-export const getAllUsers = async () => {
+export const fetchUsers = async () => {
   const { data } = await $host.get('api/user/users')
   localStorage.setItem('users', data)
   return data
 
 }
 
-export const getAllRoles = async () => {
+export const fetchRoles = async () => {
   const { data } = await $host.get('api/user/roles')
   return data
 

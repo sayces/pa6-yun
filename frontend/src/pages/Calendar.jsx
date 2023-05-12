@@ -9,43 +9,37 @@ import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 
 import { fetchAppoints, createAppoint } from '../http/appointAPI';
-import { getAllUsers } from '../http/userAPI'
+import { fetchUsers } from '../http/userAPI'
 
 import Cards from '../components/cards/Cards'
 
+import styles from '../components/common-styles.module.css'
 
 const Calendar = observer(() => {
 
   const navigate = useNavigate();
 
-  const { appoint } = useContext(Context)
-  const { user } = useContext(Context)
+  const { appoint, user } = useContext(Context)
 
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
 
   let currUser
+  let masters
 
   if (user.isAuth) {
     currUser = user.users.filter(u => u.id === user.user.id)[0]
-    // const notUserRole = user.users.filter(u => u.userRoleId === currUser.userRoleId && currUser.id !== u.id)
-
   } else {
-    currUser = undefined
+    currUser = { id: 0, email: null }
   }
 
-  console.log("currUser:")
-  console.log(currUser)
-
-  // console.log("notUserRole:")
-  // console.log(notUserRole)
-
-
+  console.log()
+  console.log("currUser: [" + currUser.id + "] " + currUser.email)
 
   useEffect(() => {
 
     fetchAppoints().then(data => appoint.setAppoints(data))
-    getAllUsers().then(data => user.setUsers(data))
+    fetchUsers().then(data => user.setUsers(data))
 
   }, [appoint, user])
 
@@ -75,13 +69,14 @@ const Calendar = observer(() => {
 
 
   return (
-    <div className='page calendar-info'>
+    <div className={styles.page}>
 
 
-      <Cards user={user} />
+      <Cards user={user} currUser={currUser} />
 
 
 
+      {/* 
       <form required={true} className="calendar-info__form"
         onSubmit={e => e.preventDefault()}
         name='get'
@@ -108,7 +103,7 @@ const Calendar = observer(() => {
 
         <button onClick={click}>записаться</button>
 
-      </form>
+      </form> */}
 
 
     </div>

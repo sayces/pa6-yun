@@ -2,92 +2,87 @@
 import React, {
   useContext,
   useEffect,
-  // useState 
+  useState
 } from 'react';
 
-import { useParams } from 'react-router-dom';
-
 import './pages.css';
-// import { PROFILE_ROUTE } from '../utils/consts';
 
-// import { useNavigate } from 'react-router-dom';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 
-import { fetchAppoints, deleteAppoint, editAppointStatus } from '../http/appointAPI';
-import { getAllUsers } from '../http/userAPI'
+import { fetchAppoints, deleteAppoint, editAppoint } from '../http/appointAPI';
+import { fetchUsers } from '../http/userAPI'
+
 
 
 
 const Profile = observer(() => {
 
-  const params = useParams()
-  console.log(params)
-
   const { appoint } = useContext(Context)
   const { user } = useContext(Context)
-
-  // const [aState, setAState] = useState('')
 
   let currUser = user.users.filter(u => u.id === user.user.id)[0]
   let clientAppoints = appoint.appoints.filter(ca => ca.client === currUser.id)
   let masterAppoints = appoint.appoints.filter(ma => ma.master === currUser.id)
 
-  console.log(`userrole ` + currUser.userRoleId)
-  console.log(`userid ` + currUser.id)
-  console.log(clientAppoints)
-  console.log(masterAppoints)
+  const [time, setTime] = useState()
+  const [status, setStatus] = useState()
 
 
 
   useEffect(() => {
 
     fetchAppoints().then(data => appoint.setAppoints(data))
-    getAllUsers().then(data => user.setUsers(data))
+    fetchUsers().then(data => user.setUsers(data))
 
-    console.log(appoint.appoints)
-  }, [appoint, user])
+  }, [appoint, appoint.appointStatusId])
 
-  const deleteAppoints = (e) => {
+
+
+  const deleteAppoints = async (e) => {
 
     try {
 
       deleteAppoint({ id: e })
+      return useEffect;
 
     } catch (e) {
-      console.log(e.promise.data.message)
+      console.log(e)
     }
-    e.preventDefault()
+
   }
 
-  const updateAppointStatus = (e) => {
-    debugger
-    console.log(e)
+
+  const updateAppoint = async (e) => {
+
     try {
 
-      editAppointStatus(
+      e => e.status !== 1 ? setStatus(1) : setStatus(2)
+      console.log(status)
 
-        { appointStatusId: 2, id: e }
+      editAppoint(
+
+        {
+          id: e,
+          appointStatusId: status,
+          time: time
+        }
+
+
       )
+      return useEffect;
 
-      console.log(appoint.appointStatusId)
     } catch (e) {
-      console.log(e.promise.data.message)
+      console.log(e)
     }
 
   }
-
-
-
-
 
   return (
     <div className='page page__profile'>
 
 
-      <form className="calendar-info__form"
-      // onSubmit={e => e.preventDefault()}
-      >
+      <div className="calendar-info__form">
         <p>добро пожаловать, {currUser.email}</p>
         <p>{currUser.userRoleId === 1 ? 'назначенные сеансы' : 'мои записи'}</p>
         <div className='appoint__list'>
@@ -100,11 +95,16 @@ const Profile = observer(() => {
                 <div className='appoint__flex' key={a.id}>
 
                   <input id={a.id} placeholder={a.date} value={a.date} type='date' readOnly={true} />
-                  <input id={a.id} placeholder={a.time} value={a.time} type='time' readOnly={true} />
-                  <button className='appoint__delete-btn' value={a.id} name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
-                  {currUser.userRoleId === 1 ? <button className='appoint__update-btn' value={a.id} name='update'
-                    onClick={e => { e.preventDefault; updateAppointStatus(e.target.value) }}
-                  > upd </button> : null}
+                  <input id={a.id} placeholder={a.time} value={a.time} type='time' onChange={e => { setTime(e.target.value) }} />
+                  <button className='appoint__delete-btn' value={a.id} name='delete' onClick={e => { deleteAppoints(e.target.value) }}> x </button>
+                  {currUser.userRoleId === 1 ? <button className='appoint__update-btn'
+                    value={a.id} name='update'
+                    status={a.appointStatusId}
+                    onClick={e => {
+                      updateAppoint(e.target.value, e.target.status)
+                    }}
+                  > {a.appointStatusId} </button> : null}
+                  <p>{a.appoint_status.status}</p>
                 </div>
               )
               :
@@ -114,7 +114,7 @@ const Profile = observer(() => {
 
                   <input id={a.id} placeholder={a.date} value={a.date} type='date' readOnly={true} />
                   <input id={a.id} placeholder={a.time} value={a.time} type='time' readOnly={true} />
-                  <button className='appoint__delete-btn' value={a.id} name='delete' onClick={e => deleteAppoints(e.target.value)}> x </button>
+                  <button className='appoint__delete-btn' value={a.id} name='delete' onClick={e => { deleteAppoints(e.target.value) }}> x </button>
 
                 </div>
               )
@@ -131,9 +131,7 @@ const Profile = observer(() => {
           )}
         </div>
 
-      </form>
-
-
+      </div>
 
     </div>
   )

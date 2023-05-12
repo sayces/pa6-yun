@@ -1,10 +1,30 @@
 .card {
   width: 20rem;
   height: 20rem;
+  border-radius: 1rem;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #dbd6d6;
+  background: #0000002a;
 }
 
 .button {
-  width: 10rem;
+  width: -webkit-fill-available;
   height: 3rem;
-  background: transparent;
+  background: #0000002a;
+  border-radius: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #dbd6d6;
+  font-size: 1.4rem;
 }
+
+
+

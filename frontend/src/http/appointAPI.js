@@ -25,11 +25,9 @@ export const deleteAppoint = async ({ id }) => {
 
 }
 
-export const editAppointStatus = async ({ appointStatusId, id }) => {
+export const editAppoint = async ({ id, time, appointStatusId }) => {
 
-  const { data } = await $authHost.put('api/calendar/appoint/update/' + id, { id, appointStatusId })
-
-  console.log(data)
+  const { data } = await $authHost.put('api/calendar/appoint/update/' + id, { time, appointStatusId })
   return data
 
 }
