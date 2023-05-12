@@ -1,34 +1,30 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext } from 'react'
+import React, { useContext } from 'react';
 import {
-  Route, 
-  Routes, 
-  // redirect
-} from 'react-router-dom'
-// import {CALENDAR_ROUTE} from '../utils/consts'
-import {Context} from '../index';
-import {authRoutes, publicRoutes} from '../routes'
-// import {fetchRole} from '../http/userAPI'
+  Route,
+  Routes
+} from 'react-router-dom';
+
+import { Context } from '../index';
+import { authRoutes, publicRoutes } from '../routes';
 
 
-const  AppRouter = observer(() => {
-  
-  
 
-  const {user} = useContext(Context)
-  
+const AppRouter = observer(() => {
+
+  const { user } = useContext(Context)
 
   return (
-    
+
     <Routes>
-        {user.isAuth && authRoutes.map(({path, Element}) =>
-          <Route key={path} path={path} element={<Element/>} exect/>
-        )}
-        {publicRoutes.map(({path, Element}) =>
-          <Route key={path} path={path} element={<Element/>} exect/>
-        )}
-    </Routes> 
-  );  
+      {user.isAuth && authRoutes.map(({ path, Element }) =>
+        <Route key={path} path={path} element={<Element />} />
+      )}
+      {publicRoutes.map(({ path, Element }) =>
+        <Route key={path} path={path} element={<Element />} />
+      )}
+    </Routes>
+  )
 });
 
 export default AppRouter;

@@ -1,20 +1,20 @@
 
-import { 
-  CALENDAR_ROUTE, 
-  GALLERY_ROUTE, 
-  LOGIN_ROUTE, 
-  PROFILE_ROUTE, 
+import {
+  CALENDAR_ROUTE,
+  GALLERY_ROUTE,
+  LOGIN_ROUTE,
+  PROFILE_ROUTE,
   SIGNUP_ROUTE,
   NATIVE_ROUTE
 } from "./utils/consts"
 
-import MyCalendar from "./pages/MyCalendar"
+import Calendar from "./pages/Calendar"
 import Gallery from "./pages/Gallery"
 import Profile from "./pages/Profile"
 // import Login from "./pages/Auth"
 // import Signup from "./pages/Auth"
 import Auth from "./pages/Auth"
-import Native from './pages/Native.jsx'
+import Native from './pages/Native'
 
 export const authRoutes = [
   {
@@ -24,7 +24,7 @@ export const authRoutes = [
 ]
 
 export const publicRoutes = [
-  
+
   {
     path: LOGIN_ROUTE,
     Element: Auth
@@ -39,12 +39,12 @@ export const publicRoutes = [
   },
   {
     path: CALENDAR_ROUTE,
-    Element: MyCalendar
+    Element: Calendar
   },
   {
     path: NATIVE_ROUTE,
     Element: Native
   }
-  
+
 ]
 

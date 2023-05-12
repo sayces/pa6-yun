@@ -52,32 +52,28 @@ class AppointController {
   async editAppointStatus(req, res) {
 
     try {
+
       const { id } = req.params
       const { appointStatusId } = req.body
+      console.log(id, appointStatusId)
       if (!id || !appointStatusId) {
-        return res.status(400).json(e)
+        return res.status(400).json({ message: "no id or statusid" })
       }
       const findAppoint = await Appointment.findOne({ where: { id } })
       if (!findAppoint) {
-        return res.status(400).json(e)
+        return res.status(400).json({ message: "aint find" })
       }
       const updateAppoint = await Appointment.update({ findAppoint }, { appointStatusId })
 
       if (!updateAppoint) {
-        return res.status(400).json(e)
+        return res.status(400).json({ message: "aint update" })
       }
-
-
-
-
 
       return res.json(updateAppoint);
     } catch (e) {
       return res.status(400).json(e)
 
     }
-
-
 
   }
 

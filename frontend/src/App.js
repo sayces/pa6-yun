@@ -1,14 +1,13 @@
 
-import React, { useContext, useEffect, useState } from "react"
-import AppRouter from "./components/AppRouter"
+import React, { useContext, useEffect, useState } from "react";
+import AppRouter from "./components/AppRouter";
 import { BrowserRouter } from 'react-router-dom';
 import NavBar from "./components/NavBar";
 import Columns from '../src/components/Columns';
-import './index.css'
+import './index.css';
 import { observer } from "mobx-react-lite";
-import { auth, getAllUsers, getAllRoles } from './http/userAPI'
+import { auth, getAllUsers, getAllRoles } from './http/userAPI';
 import { Context } from './index';
-
 
 
 const App = observer(() => {
@@ -26,14 +25,11 @@ const App = observer(() => {
         user.setUser(data)
         user.setIsAuth(true)
 
-        console.log(data)
-
       }).finally(() => setLoading(false))
     } catch (e) {
       alert(e.promise.data.message)
     }
-  }, [user])
-
+  }, [])
 
 
   if (loading) {

@@ -1,7 +1,7 @@
 # pa6
  
 cd backend
-npm init -y
+npm i node
 
-cd ../frontend
+cd frontend
 npm i node

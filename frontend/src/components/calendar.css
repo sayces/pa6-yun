@@ -35,10 +35,7 @@
 
 .react-calendar__navigation__label span {
   display: inline-block;
-  
-  
   color: rgb(199, 189, 189);
-  
   font-size: 2rem;
 
   font-family: 'Montserrat Alternates';
