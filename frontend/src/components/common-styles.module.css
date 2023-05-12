@@ -1,0 +1,15 @@
+.page {
+  position: absolute;
+  background: transparent;
+  border-radius: 1rem;
+  width: 36rem;
+  height: fit-content;
+  top: 20rem;
+  backdrop-filter: blur(0.2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 1rem;
+  border: 0.2rem #656565 solid
+}
