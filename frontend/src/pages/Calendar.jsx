@@ -41,7 +41,7 @@ const Calendar = observer(() => {
     fetchAppoints().then(data => appoint.setAppoints(data))
     fetchUsers().then(data => user.setUsers(data))
 
-  }, [appoint, user])
+  }, [])
 
   const click = async (e) => {
 

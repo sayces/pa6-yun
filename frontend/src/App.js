@@ -15,7 +15,6 @@ const App = observer(() => {
 
   const { user } = useContext(Context);
 
-
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -30,11 +29,13 @@ const App = observer(() => {
       }).finally(() => setLoading(false))
 
     } catch (e) {
-
-      alert(e)
+      console.log(e)
     }
-  }, [user])
 
+  }, [])
+
+  console.log(user.user)
+  console.log(user.isAuth)
 
   if (loading) {
     return <h1>LOADING</h1>
@@ -46,7 +47,7 @@ const App = observer(() => {
         <NavBar className="navbar" />
         <div className="center">
           <Columns className="center__elem ui__columns" />
-          <AppRouter className='center__elem app-router' />
+          <AppRouter className='center__elem app-router' user={user} />
         </div>
       </BrowserRouter>
     </div>

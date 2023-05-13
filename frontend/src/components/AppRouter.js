@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Route,
   Routes
@@ -10,9 +10,7 @@ import { authRoutes, publicRoutes } from '../routes';
 
 
 
-const AppRouter = observer(() => {
-
-  const { user } = useContext(Context)
+const AppRouter = observer(({ user }) => {
 
   return (
 

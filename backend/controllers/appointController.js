@@ -1,14 +1,17 @@
 
-const { Appointment, AppointmentStatus } = require('../models/models')
+const { Appointment, AppointmentStatus, User } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class AppointController {
 
   async getAllAppoint(req, res) {
     const appoints = await Appointment.findAll({
-      include: {
+      include: [{
+        model: User
+      },
+      {
         model: AppointmentStatus
-      }
+      }]
     })
     return res.json(appoints)
   }
@@ -56,13 +59,13 @@ class AppointController {
     try {
 
       const { id } = req.params
-      const data = req.body
+      const appoint = req.body
       console.log(req.params, req.body)
 
       if (!req.params || !req.body) {
-        return res.status(400).json({ message: "no id or statusid" })
+        return res.status(400).json({ message: "no reqparams or reqbody" })
       }
-      const updateAppoint = await Appointment.update(data, { where: { id } })
+      const updateAppoint = await Appointment.update(appoint, { where: { id } })
 
       if (!updateAppoint) {
         return res.status(400).json({ message: "aint update" })
@@ -73,18 +76,6 @@ class AppointController {
       return res.status(400).json(e)
     }
   }
-
-  // async 
-
-  //   Posts.findAll({
-  //     where: { name: "Sunshine"},
-  //     include: [{
-  //       model: User,
-  //       where: ["year_birth = post_year"]
-  //   }]
-  // }).then(posts => {
-  //   /* ... */
-  // });
 
 }
 

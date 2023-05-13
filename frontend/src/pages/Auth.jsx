@@ -23,47 +23,30 @@ const Auth = observer(() => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userRole, setUserRole] = useState('2')
+  const [userRole, setUserRole] = useState(2)
 
-
-
-  const click = async (e) => {
+  const auth = async (e) => {
 
     let data;
 
     try {
 
       if (isLogin && email !== '' && password !== '') {
-
         data = await login(email, password);
         console.log(data)
         user.setUser(data)
         user.setIsAuth(true)
 
         navigate(CALENDAR_ROUTE)
-
       } else if (!isLogin && email !== '' && password !== '' && userRole !== '') {
 
         data = await signup(email, password, userRole)
         navigate(LOGIN_ROUTE)
         console.log(data)
-
-
       } else {
-
-        console.log('no data : auth')
-
+        console.log('no data')
       }
-
-    } catch (e) { alert(e.promise.data.message) }
-
-
-
-
-
-
-
-
+    } catch (e) { console.log(e) }
   }
 
   return (
@@ -119,8 +102,7 @@ const Auth = observer(() => {
           </Link>
         </div>
 
-
-        <button className='form__auth--submit-btn' onClick={click}>{isLogin ? 'войти' : 'создать'}</button>
+        <button className='form__auth--submit-btn' onClick={auth}>{isLogin ? 'войти' : 'создать'}</button>
       </form>
 
     </div>
