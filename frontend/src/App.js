@@ -1,40 +1,37 @@
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import AppRouter from "./components/AppRouter";
 import { BrowserRouter } from 'react-router-dom';
 import NavBar from "./components/NavBar";
-import Columns from '../src/components/Columns';
-import './index.css';
+import Columns from './components/ui/columns/Columns';
+
 import { observer } from "mobx-react-lite";
 import { auth, fetchUsers, fetchRoles } from './http/userAPI';
 import { Context } from './index';
 
 
-
-const App = observer(() => {
+const App = () => {
 
   const { user } = useContext(Context);
 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    fetchUsers().then(data => user.setUsers(data))
+    fetchRoles().then(data => user.setRoles(data))
 
     try {
-      fetchUsers().then(data => user.setUsers(data))
-      fetchRoles().then(data => user.setRoles(data))
 
       auth().then(data => {
-        user.setIsAuth(true)
         user.setUser(data)
+        user.setIsAuth(true)
       }).finally(() => setLoading(false))
 
     } catch (e) {
       console.log(e)
     }
+  }, [user.users])
 
-  }, [])
-
-  console.log(user.user)
   console.log(user.isAuth)
 
   if (loading) {
@@ -53,6 +50,6 @@ const App = observer(() => {
     </div>
 
   )
-});
+};
 
 export default App;

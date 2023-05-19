@@ -25,24 +25,21 @@ const Auth = observer(() => {
   const [password, setPassword] = useState('')
   const [userRole, setUserRole] = useState(2)
 
-  const auth = async (e) => {
+  const auth = async (email, password, userRoleId) => {
 
     let data;
-
     try {
 
       if (isLogin && email !== '' && password !== '') {
+
         data = await login(email, password);
-        console.log(data)
         user.setUser(data)
         user.setIsAuth(true)
-
         navigate(CALENDAR_ROUTE)
-      } else if (!isLogin && email !== '' && password !== '' && userRole !== '') {
+      } else if (!isLogin && email !== '' && password !== '' && userRoleId !== '') {
 
-        data = await signup(email, password, userRole)
+        data = await signup(email, password, userRoleId)
         navigate(LOGIN_ROUTE)
-        console.log(data)
       } else {
         console.log('no data')
       }
@@ -51,60 +48,45 @@ const Auth = observer(() => {
 
   return (
     <div className='page page__auth'>
-      <form className="form__auth"
-        onSubmit={e => e.preventDefault()}
-      >
+      <div className="form__auth">
 
+        <div>
+          <label>
+            {isLogin ? 'прошу, ваш логин' : 'прошу, задайте логин'}
+          </label>
+          <input required={true} placeholder='email' type="text" value={email} name="email" id="email"
+            onChange={e => setEmail(e.target.value)}
+          />
 
-        {isLogin ?
-          <div>
-            <label >прошу, ваш логин</label>
-            <input required={true} placeholder='email' type="text" value={email} name="email" id="email"
-              onChange={e => setEmail(e.target.value)}
-            />
+          <label>
+            {isLogin ? 'прошу, ваш пароль' : 'прошу, придумайте пароль'}
+          </label>
+          <input required={true} type="text" name="password" value={password} id="password"
+            onChange={e => setPassword(e.target.value)}
+          />
+        </div>
 
-            <label >прошу, ваш пароль</label>
-            <input required={true} type="password" name="password" value={password} id="password"
-              onChange={e => setPassword(e.target.value)}
-            />
-
-          </div>
-          :
-          <div>
-            <label >прошу, задайте логин</label>
-            <input required={true} placeholder='email' type="text" value={email} name="email" id="email"
-              onChange={e => setEmail(e.target.value)} />
-
-            <label >прошу, придумайте пароль</label>
-            <input required={true} type="password" name="password" value={password} id="password"
-              onChange={e => setPassword(e.target.value)} />
-
-            <label>выберите свою роль</label>
-
-            <div className='form__auth--radio'>
-              {user.roles.map(role =>
-
-                <button className='btn__radio'
-                  onClick={e => setUserRole(e.target.value)}
-                  key={role.id} value={role.id} name='role'>{role.role}</button>
-
-
-              )}
-              <p style={{ color: 'grey' }}>[по-умолчанию]</p>
-            </div>
-          </div>
-        }
         <div className='form__auth--links'>
-          <label>{isLogin ? 'новенький?' : 'старенький?'}</label>
+
+          <label>
+            {isLogin ? 'новенький?' : 'старенький?'}
+          </label>
+
           <Link className='form__auth-link'
             to={isLogin ? SIGNUP_ROUTE : LOGIN_ROUTE}>
             {isLogin ? 'создай аккаунт' : 'авторизуйся'}
           </Link>
+
         </div>
 
-        <button className='form__auth--submit-btn' onClick={auth}>{isLogin ? 'войти' : 'создать'}</button>
-      </form>
+        <button className='form__auth--submit-btn'
+          onClick={() => auth(email, password, userRole)}>
+          {isLogin ? 'войти' : 'создать профиль'}
+        </button>
 
+        <p style={{ color: 'grey' }}>[роль по-умолчанию: клиент]</p>
+
+      </div>
     </div>
   )
 })

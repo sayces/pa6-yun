@@ -1,14 +1,22 @@
+@import 'select';
 
-html, body {
-  font-size: 10px;
+$rem: 10px;
+$font: 'Montserrat Alternates', sans-serif;
+%marpad { 
+  margin: 0; 
+  padding: 0;
+}
+
+html, 
+body {
+  font-size: $rem;
   background: #1E1E1E;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: $font;
   font-weight: 700;  
 }
 
 * {
-  margin: 0;
-  padding: 0;
+  @extend %marpad;
 }
 
 *:focus {
@@ -23,19 +31,19 @@ html, body {
 
 @media (min-width: 1080px) {
   html, body {
-    font-size: 10px;
+    font-size: $rem;
   }
 } 
 
 @media (max-width: 1080px) {
   html, body {
-    font-size: 7px;
+    font-size: 0.7$rem;
   }
 } 
 
 @media (max-width: 500px) {
   html, body {
-    font-size: 5px;
+    font-size: 0.5*$rem;
   }
 }
 
@@ -78,12 +86,12 @@ html, body {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 3$rem;
   color: #ffffff;
   
 }
 
 a {
-  font-size: 3rem;
+  font-size: 3$rem;
   color: #ffffff;
 }

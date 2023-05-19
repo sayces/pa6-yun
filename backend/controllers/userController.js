@@ -1,26 +1,26 @@
 
 const ApiError = require('../error/ApiError')
-const {User, UserRole} = require('../models/models')
+const { User, UserRole } = require('../models/models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const generateJwt = (id, email, userRoleId) => {
-  
+
   return jwt.sign(
 
-    {id, email, userRoleId},
+    { id, email, userRoleId },
     process.env.SECRET_KEY,
-    {expiresIn: '24h'}
+    { expiresIn: '24h' }
 
-    )
+  )
 
 }
 
 class UserController {
-  
+
   async signup(req, res, next) {
 
-    const {email, password, userRoleId} = req.body
+    const { email, password, userRoleId } = req.body
 
     if (!email || !password) {
 
@@ -30,10 +30,10 @@ class UserController {
 
     const candidate = await User.findOne(
 
-      {where: {email}}
+      { where: { email } }
 
     )
-      
+
     if (candidate) {
 
       return next(ApiError.err404("'такой' пользователь уже существует"))
@@ -41,51 +41,70 @@ class UserController {
     }
 
     const hashPassword = await bcrypt.hash(password, 5)
-    const user = await User.create({email, password: hashPassword, userRoleId})
+    const user = await User.create({ email, password: hashPassword, userRoleId })
 
-    const token = generateJwt(user.id, user.email , user.userRoleId)
-    
-    return res.json({token})
-      
+    const token = generateJwt(user.id, user.email, user.userRoleId)
+
+    return res.json({ token })
+
   }
-  
+
   async login(req, res, next) {
 
-    const {email, password} = req.body
-    const user = await User.findOne({ where:{email} })
+    const { email, password } = req.body
+    const user = await User.findOne({ where: { email } })
 
     if (!user) {
-      
+
       return next(ApiError.err500('возможно, такого пользователя не существует'))
 
     }
-    
+
     let comparePass = bcrypt.compareSync(password, user.password)
-    
+
     if (!comparePass) {
-      
+
       return next(ApiError.err500('возможно, пароль указан неправильно'))
-      
+
     }
 
     const token = generateJwt(user.id, user.email, user.role)
-    
-    return res.json({token})
+
+    return res.json({ token })
   }
-  
+
   async auth(req, res) {
 
-    const token = generateJwt(req.user.id, req.user.email, req.user.userRoleId )
-    
-    return res.json({token})
+    const token = generateJwt(req.user.id, req.user.email, req.user.userRoleId)
+
+    return res.json({ token })
 
   }
-  
+
   async getAllUsers(req, res) {
 
     const users = await User.findAll()
-    
+
     return res.json(users)
+
+  }
+
+  async getOneUser(req, res) {
+
+    const { id } = req.params.id
+
+    const users = await User.findAll({ where: { id } })
+
+    return res.json(users)
+
+  }
+
+  async updateUser(req, res) {
+    const { id } = req.params.id
+    const user = req.body
+    const updUser = await User.update(user, { where: { id } })
+
+    return res.json(updUser)
 
   }
 

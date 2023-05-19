@@ -1,39 +1,42 @@
 
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState, useCallback, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import '../../pages/pages.css';
 import { Context } from '../../index';
-import { deleteAppoint, editAppoint, fetchAppoints } from '../../http/appointAPI';
+import { deleteAppoints, editAppoint, fetchAppoints, fetchStatuses } from '../../http/appointAPI';
+import styles from './appoint.module.css'
+import Select from '../ui/Select'
 
-const Appoint = observer(({ a }) => {
+const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser }) => {
 
-  const { appoint } = useContext(Context)
+  console.log('render appoint')
+
+  const { appoint, user } = useContext(Context)
+
+  let clientEmail = user.users.filter(cn => currAppoint.client === cn.id)[0].email
+  let masterEmail = user.users.filter(cn => currAppoint.master === cn.id)[0].email
 
   useEffect(() => {
-    console.log(appoint)
-  }, [])
 
-  const deleteAppoints = async (e) => {
+  }, [fetchMemoAppoints, currAppoint])
+
+  const deleteAppoint = async () => {
 
     try {
-
-      deleteAppoint({ id: e })
+      deleteAppoints({ id: currAppoint.id })
     } catch (e) {
       console.log(e)
     }
   }
 
-  const updateAppoint = async (e) => {
+  const updateAppoint = async (statusId) => {
 
     try {
 
-      setStatus(a.appointStatusId === 1 ? a.appointStatusId = 2 : a.appointStatusId = 1)
-
       editAppoint(
         {
-          id: e,
-          appointStatusId: status,
-          time: time
+          id: currAppoint.id,
+          appointStatusId: statusId,
         }
       )
     } catch (e) {
@@ -43,33 +46,24 @@ const Appoint = observer(({ a }) => {
 
   return (
 
+
     <div className='appoint__flex'>
+      <p className={styles.name}>{currUser.id === 1 ? `${clientEmail} ~ваш клиент ` : `${masterEmail} ~ваш мастер`}</p>
+      <input id={currAppoint.id} placeholder={currAppoint.date} value={currAppoint.date} type='date' readOnly={true} />
 
-      {
-        <>
-          <p>{a.user.email}</p>
+      <input id={currAppoint.id} placeholder={currAppoint.time} value={currAppoint.time} type='time' readOnly={true} />
 
-          <input id={a.id} placeholder={a.date} value={a.date} type='date' readOnly={true} />
-          <input id={a.id} placeholder={a.time} value={a.time} type='time' readOnly={true} />
 
-          <button className='appoint__delete-btn'
-            value={a.id} name='delete'
-            onClick={e => { deleteAppoints(e.target.value) }}>
-            x
-          </button>
 
-          <button className='appoint__update-btn'
-            value={a.appointStatusId} name='update'
-            onChange={e => { updateAppoint(e.target.value) }
-            }>
+      <Select object={appoint.statuses} currObject={currAppoint} onUpdate={updateAppoint} />
+      <button className='appoint__delete-btn'
+        value={currAppoint.id} name='delete'
+        onClick={deleteAppoint}>
+        x
+      </button>
+    </div >
 
-          </button>
-
-          <p>{a.appoint_status.status}</p>
-        </>
-      }
-    </div>
   )
 })
 
-export default Appoint
+export default React.memo(Appoint)

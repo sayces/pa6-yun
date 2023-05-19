@@ -9,13 +9,14 @@ import { Context } from '../index';
 import { authRoutes, publicRoutes } from '../routes';
 
 
+const AppRouter = ({ user }) => {
 
-const AppRouter = observer(({ user }) => {
+  const authCheck = user.isAuth
 
   return (
 
     <Routes>
-      {user.isAuth && authRoutes.map(({ path, Element }) =>
+      {authCheck && authRoutes.map(({ path, Element }) =>
         <Route key={path} path={path} element={<Element />} />
       )}
       {publicRoutes.map(({ path, Element }) =>
@@ -23,6 +24,6 @@ const AppRouter = observer(({ user }) => {
       )}
     </Routes>
   )
-});
+};
 
 export default AppRouter;

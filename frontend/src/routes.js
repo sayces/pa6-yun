@@ -20,7 +20,8 @@ export const authRoutes = [
   {
     path: PROFILE_ROUTE,
     Element: Profile
-  }
+  },
+
 ]
 
 export const publicRoutes = [

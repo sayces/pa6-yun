@@ -4,39 +4,69 @@ const ApiError = require('../error/ApiError')
 
 class AppointController {
 
-  async getAllAppoint(req, res) {
+  async getAllAppoints(req, res) {
+
     const appoints = await Appointment.findAll({
-      include: [{
-        model: User
-      },
-      {
-        model: AppointmentStatus
-      }]
+      include: [
+        {
+          model: AppointmentStatus
+        },
+        {
+          model: AppointmentStatus
+        },
+      ]
     })
     return res.json(appoints)
+  }
+
+  async getAllStatus(req, res) {
+
+    const statuses = await AppointmentStatus.findAll()
+    return res.json(statuses)
+  }
+
+  async appoint_status(req, res) {
+
+    const statuses = await Appointment.findAll({
+      include: [
+        {
+          model: AppointmentStatus
+        },
+        {
+          model: AppointmentStatus
+        },
+      ]
+    })
+    return res.json(statuses)
   }
 
   async appoint(req, res) {
 
     const { client, master, date, time, appointStatusId } = req.body
-
     const appoint = await Appointment.create({ client, master, date, time, appointStatusId })
-
     return res.json(appoint)
-
   }
 
-  async findOneAppoint(req, res) {
+  async getOneAppoint(req, res) {
     try {
       const { id } = req.params
 
       if (!id) {
         res.status(400).json({ message: 'no id' })
       }
+      const appoint = await Appointment.findOne({
+        where: { id },
+        include: [
+          {
+            model: User
+          },
+          {
+            model: AppointmentStatus
+          },
+        ]
 
-
-      const appointById = await Appointment.findOne({ where: { id } })
-      return res.json(appointById)
+      })
+      return res.json(appoint)
     } catch (e) {
       return res.status(500).json(e)
     }
@@ -65,13 +95,13 @@ class AppointController {
       if (!req.params || !req.body) {
         return res.status(400).json({ message: "no reqparams or reqbody" })
       }
-      const updateAppoint = await Appointment.update(appoint, { where: { id } })
+      const updAppoint = await Appointment.update(appoint, { where: { id } })
 
-      if (!updateAppoint) {
+      if (!updAppoint) {
         return res.status(400).json({ message: "aint update" })
       }
 
-      return res.json(updateAppoint);
+      return res.json(updAppoint);
     } catch (e) {
       return res.status(400).json(e)
     }

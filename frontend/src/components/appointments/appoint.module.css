@@ -1,0 +1,19 @@
+
+.appoint_group {
+  margin: 1rem;
+}
+
+.appoint {
+  margin: 1rem;
+}
+
+.statuses {
+  background: #dbdbdb;
+  border: none;
+  height: 3rem;
+  width: fit-content;
+}
+
+.name {
+  color: black;
+}

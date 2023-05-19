@@ -1,22 +1,25 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import UserCard from './UserCard'
+import styles from './card.module.scss'
 
 const Cards = observer(({ user, currUser }) => {
 
   let notUser = user.users.filter(u => u.id !== currUser.id)
   let masters = notUser.filter(u => u.userRoleId === 1)
 
-  if (currUser.userRoleId === 1) {
-    return notUser.map(u =>
-      <UserCard user={u} key={u.id} />
-    )
-  } else {
-    return masters.map(u =>
-      <UserCard user={u} key={u.id} />
-    )
-  }
+
+
+
+
+  return (
+    <>
+      {masters.map(u =>
+        <UserCard user={u} key={u.id} className={styles.card} />
+      )}
+    </>
+  )
 })
 
 export default Cards

@@ -33,9 +33,6 @@ const Calendar = observer(() => {
     currUser = { id: 0, email: null }
   }
 
-  console.log()
-  console.log("currUser: [" + currUser.id + "] " + currUser.email)
-
   useEffect(() => {
 
     fetchAppoints().then(data => appoint.setAppoints(data))
@@ -50,7 +47,6 @@ const Calendar = observer(() => {
 
       try {
 
-        e.preventDefault()
         createAppoint({ date: date, time: time, master: Number(master), client: currUser.id, appointStatusId: 1 })
         navigate(PROFILE_ROUTE)
 

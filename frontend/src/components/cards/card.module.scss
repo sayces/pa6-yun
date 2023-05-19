@@ -1,0 +1,66 @@
+.card {
+  width: 20rem;
+  min-height: 30rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  
+  border-radius: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #dbd6d6;
+  background: #e2e2e200;
+  transition: all 0.4s ease-in;
+}
+
+.card_opened {
+  width: 30rem;
+  height: 3rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  
+  border-radius: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #656565;
+  background: #656565;
+  transition: all 0.4s ease-out;
+}
+
+.button {
+  min-width: 20rem;
+  height: 3rem;
+  background: #969696e5;
+  border-radius: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #dbd6d6;
+  font-size: 1.4rem;
+  max-width: 8rem;
+  padding: 1rem;
+}
+
+.cardInfo {
+  display: flex;
+  transition: all 0.4s;
+}
+
+.cardInfoHidden {
+  display: none;
+  transition: all 0.4s;
+}
+
+.tile {
+  height:  3.6rem !important;
+  width:  3.6rem !important;
+  background-color: red !important;
+}
+
+

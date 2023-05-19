@@ -1,24 +1,36 @@
 
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
 import { observer } from 'mobx-react-lite';
-import styles from './card.module.css';
+import styles from './card.module.scss';
+import { Link, useNavigate } from 'react-router-dom';
+import { PROFILE_ROUTE } from '../../utils/consts';
+import UserCardOpened from './UserCardOpened';
+
 
 
 const UserCard = observer(({ user }) => {
 
-  const [master, setMaster] = useState('')
-  console.log(master)
+  // const navigate = useNavigate()
+
+  useEffect(() => {
+
+  }, [])
+
+
+  const [cardOpened, setCardOpened] = useState(false)
+
+
+
+
+
 
   return (
+    <>
+      <div className={styles.card}>{user.email}</div>
 
-    <div className={styles.card} key={user.id}>
-      <button className={styles.button}
-        onClick={e => setMaster(e.target.value)}
-        value={user.id} name='master'>{user.email}
-      </button>
-    </div>
-
+    </>
   )
 })
 
-export default UserCard
+export default React.memo(UserCard)
