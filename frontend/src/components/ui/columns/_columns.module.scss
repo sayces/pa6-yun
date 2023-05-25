@@ -1,25 +1,25 @@
-.columns_box {
+.columns {
   display: flex;
   justify-content: space-around;
-  position: relative;
   top: 0;
   gap: 4rem;
   grid-column: 2;
   grid-row: 1;
   margin: 0 4rem;
+  z-index: 1;
 }
 
-.columns_box div {
+.columns div {
   width: 4rem;
   min-height: 200rem;
 }
 
-.columns_box div:not(.column4){
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 4.17%, #FFAC88 55.73%, #ED9F9F 100%);
+.columns div:not(.column4) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 4.17%, #9d6852 55.73%, #815656 100%);
 }
 
-.column4{
-  background: linear-gradient(180deg, #CC6847 0%, #981C1C 27.6%, #FFCEBD 72.92%, #FFDFDF 96.35%);
+.column4 {
+  background: linear-gradient(180deg, #cc6847 0%, #981c1c 27.6%, #ffcebd 72.92%, #ffdfdf 96.35%);
 }
 
 .logo_un {
@@ -35,8 +35,8 @@
 }
 
 .logo_un:hover {
-  cursor: pointer;                                                                                         
-  position: sticky;
+  cursor: pointer;
+
   top: 4rem;
   margin: 0 0 0 -1rem;
   width: 6.2rem;
@@ -45,5 +45,4 @@
   transform: scale(106%);
   opacity: 100%;
   transition: all 0.5s;
-  
 }

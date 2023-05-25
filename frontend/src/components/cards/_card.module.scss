@@ -1,0 +1,91 @@
+@import "../../styles/index.module.scss";
+
+.card {
+  width: 28 * $rem;
+  height: fit-content;
+  border-radius: $rem;
+  margin: $rem;
+  border-radius: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #dbd6d6;
+  background: transparent;
+  transition: all 0.4s ease-in;
+  filter: blur(0px);
+}
+
+.button {
+  width: 10rem;
+  height: 3rem;
+  background: linear-gradient(
+    180deg,
+    rgba(180, 180, 180, 0.5) 0%,
+    rgba(153, 153, 153, 0.692) 26%,
+    rgba(31, 31, 31, 0.5)
+  );
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border-radius: 0.6rem;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #dbd6d6;
+  font-size: 1.4rem;
+  max-width: 8rem;
+  padding: 1rem;
+}
+
+.cardInfo {
+  display: flex;
+  transition: all 0.4s;
+}
+
+.cardInfoHidden {
+  display: none;
+  transition: all 0.4s;
+}
+
+.tile {
+  height: 3.6rem !important;
+  width: 3.6rem !important;
+  background-color: red !important;
+}
+
+.appoint_card {
+  display: flex;
+  flex-direction: row;
+  background-color: #605c5b;
+  padding: 1rem;
+  margin: 0.3rem;
+  width: 26rem;
+  justify-content: space-between;
+  border-radius: 0.6rem;
+  border: 0.12rem solid rgb(100, 100, 100);
+  background: linear-gradient(
+    180deg,
+    rgba(180, 180, 180, 0.5) 0%,
+    rgba(153, 153, 153, 0.692) 26%,
+    rgba(31, 31, 31, 0.5)
+  );
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+}
+
+.galochka {
+  padding: 0.1rem;
+  margin: 0;
+  width: 30%;
+  justify-self: flex-end;
+  background: #db9c77;
+  border: none;
+}

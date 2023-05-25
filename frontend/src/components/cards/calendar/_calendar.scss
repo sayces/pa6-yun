@@ -1,45 +1,45 @@
+// @import '../../styles/index.scss';
+
 .react-calendar {
   display: flex;
   flex-direction: column;
   width: 28rem;
-  height: 28rem;
-  margin: 0 4rem;
-  position: absolute;
-  
-  z-index: 9;
+  height: fit-content;
+  margin: 1rem;
 }
-
-
 
 .react-calendar__navigation {
   display: flex;
   flex-direction: row;
-  height: 6rem;
-  margin: 1rem 0;
+  height: 3rem;
+  margin: 1rem;
   border-radius: 1rem;
-  
 }
-  
+
+.day {
+  height: 4rem;
+  cursor: pointer;
+  border-radius: 20%;
+  border: 0;
+  margin: 0.1rem 0;
+}
 
 .react-calendar__navigation button {
-  
   height: 3rem;
   width: 3rem;
   background: transparent;
-  
+
   background-color: rgba(22, 19, 19, 0.1);
   border-radius: 1rem;
   border-color: transparent;
 }
-
 
 .react-calendar__navigation__label span {
   display: inline-block;
   color: rgb(199, 189, 189);
   font-size: 2rem;
 
-  font-family: 'Montserrat Alternates';
-  
+  font-family: "Montserrat Alternates";
 }
 
 .react-calendar__navigation__arrow {
@@ -59,12 +59,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   font-weight: 700;
   align-items: center;
   color: rgb(221, 215, 215);
   font-size: 1.5rem;
-  
+
   height: 1rem;
   width: 1rem;
   background: transparent;
@@ -79,8 +79,8 @@
   background: rgb(192, 174, 174);
 }
 
-.react-calendar__year-view__months__month:disabled {
-  background: rgb(87, 87, 87, 0.4);
+.react-calendar__year-view__months__day:disabled {
+  background: rgba(129, 127, 127, 0.4);
 }
 
 .react-calendar__year-view__months__month:active button {
@@ -93,18 +93,9 @@
   border-radius: 1rem;
   backdrop-filter: blur(1rem);
   height: auto;
-  
-
-  
 }
 
 .react-calendar__month-view__days button {
-  height: 4rem;
-  
-  
-  cursor: pointer;
-  border-radius: 20%;
-  border: 0;
 }
 
 .react-calendar__month-view__days button abbr {
@@ -118,25 +109,20 @@
   border: 1rem;
   font-weight: bolder;
   font-size: large;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   font-size: 800;
-
 }
-
-
 
 .react-calendar__month-view__days button {
   mix-blend-mode: overlay;
   transform: scale(90%);
   transition: all 0.1s;
   opacity: 90%;
-  
 }
 
 .react-calendar__month-view__days button:hover {
   background: rgba(255, 255, 255, 60%);
   border-radius: 40%;
-
 }
 
 .react-calendar__month-view__days button:active abbr {
@@ -157,7 +143,7 @@
 }
 
 .sunday {
-  background: rgb(255, 255, 255, 0.1);
+  background: rgba(156, 118, 118, 0.1);
 }
 
 .sunday:hover {
@@ -166,4 +152,8 @@
 
 .react-calendar__month-view__weekdays__weekday {
   display: none;
+}
+
+.react-calendar__tile--active {
+  background: rgb(192, 153, 153);
 }

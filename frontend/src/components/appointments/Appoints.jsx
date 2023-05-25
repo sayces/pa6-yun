@@ -4,11 +4,11 @@ import React, { useContext, useEffect, useState, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import Appoint from './Appoint'
 import { Context } from '../../index'
-import styles from './appoint.module.css'
+import styles from './_appoint.module.scss'
 import { fetchAppoints, fetchAppointStatus, fetchStatuses } from '../../http/appointAPI'
 
 
-const Appoints = observer(({ currUser, fetchMemoStatuses }) => {
+const Appoints = observer(({ currUser, fetchMemoStatuses, date }) => {
 
   const { appoint } = useContext(Context)
 
@@ -30,19 +30,25 @@ const Appoints = observer(({ currUser, fetchMemoStatuses }) => {
         {masterAppoints.length > 0 ? 'назначенные сеансы' : null}
       </p>
       {
-        masterAppoints.map(a => <Appoint className={styles.appoint} currAppoint={a}
+        masterAppoints.map(a => <Appoint className={styles.appoint}
+          currAppoint={a}
           currUser={currUser}
           fetchMemoAppoints={fetchMemoAppoints}
-          appoint={appoint} key={a.id} />)
+          appoint={appoint}
+          key={a.id}
+        />)
       }
       <p className={styles.label}>
         {clientAppoints.length > 0 ? 'мои записи' : null}
       </p>
       {
-        clientAppoints.map(a => <Appoint className={styles.appoint} currAppoint={a}
+        clientAppoints.map(a => <Appoint className={styles.appoint}
+          currAppoint={a}
           currUser={currUser}
           fetchMemoAppoints={fetchMemoAppoints}
-          appoint={appoint} key={a.id} />)
+          appoint={appoint}
+          key={a.id}
+        />)
       }
 
     </div>

@@ -10,8 +10,10 @@ import { authRoutes, publicRoutes } from '../routes';
 
 
 const AppRouter = ({ user }) => {
-
+  console.log('render router')
   const authCheck = user.isAuth
+
+
 
   return (
 

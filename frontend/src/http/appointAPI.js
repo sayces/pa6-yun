@@ -44,10 +44,10 @@ export const deleteAppoints = async ({ id }) => {
 
 }
 
-export const editAppoint = async ({ id, appointStatusId }) => {
-  console.log('edit ' + id + ' ' + appointStatusId)
+export const editAppoint = async ({ id, appointStatusId, client }) => {
+  console.log('edit ' + id + ' ' + appointStatusId + ' ' + client)
 
-  const { data } = await $authHost.put('api/calendar/appoint/update/' + id, { appointStatusId })
+  const { data } = await $authHost.put('api/calendar/appoint/update/' + id, { appointStatusId, client })
   return data
 
 }

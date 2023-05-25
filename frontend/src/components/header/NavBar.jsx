@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Context } from '../index'
+import { Context } from '../../index'
 
 
 import {
@@ -7,8 +7,8 @@ import {
   useNavigate
 }
   from 'react-router-dom';
-import './header.css';
-import { CALENDAR_ROUTE, GALLERY_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../utils/consts';
+import styles from './_header.module.scss';
+import { CALENDAR_ROUTE, GALLERY_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../utils/consts';
 import { observer } from 'mobx-react-lite';
 
 
@@ -33,38 +33,38 @@ const NavBar = observer(() => {
 
 
   return (
-    <div className='header-box__main header-box'>
+    <div className={styles.header_box}>
 
       <Link
         to={CALENDAR_ROUTE}
-        className='header__link header-link__calendar'>
+        className={styles.header_link_calendar}>
         Календарь
       </Link>
 
       <Link
         to={GALLERY_ROUTE}
-        className='header__link header-link__gallery'>
+        className={styles.header_link_gallery}>
         Галерея
       </Link>
 
       {user.isAuth === true
         ?
-        <div className='header-box'>
+        <div className={styles.header_box}>
           <Link
             to={PROFILE_ROUTE}
-            className='header__link header-link__auth'>
+            className={styles.header_link_auth}>
             Профиль
           </Link>
 
           <Link
             onClick={logout}
             to={LOGIN_ROUTE}
-            className='header__link header-link__auth'>
+            className={styles.header_link_auth}>
             Выход
           </Link>
         </div>
         :
-        <Link to={LOGIN_ROUTE} className='header__link header-link__auth'>
+        <Link to={LOGIN_ROUTE} className={styles.header_link_auth}>
           Авторизоваться
         </Link>
       }

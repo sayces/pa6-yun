@@ -1,21 +1,22 @@
 
 import React, { useContext, useEffect, useState } from 'react'
-import styles from './_select.scss'
+import styles from './_select.module.scss'
 import { fetchAppointStatus } from '../../http/appointAPI'
 import { observer } from 'mobx-react-lite';
 
 
 
-const Select = observer(({ object, currObject, onUpdate }) => {
+const Select = observer(({ object, currObject, onUpdate, currUser }) => {
 
-  // useMemo(() => {
+  useEffect(() => {
 
-  // }, [currObject])
+  }, [currObject])
 
   return (
 
     <>
       <select className={styles.select}
+        disabled={(currUser.userRoleId) == 2 ? 'true' : 'false'}
         name='update'
         onChange={(e) => onUpdate(e.target.value)}
         defaultValue={currObject.appointStatusId}

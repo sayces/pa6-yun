@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite';
 
-import './pages.css';
+import styles from './_pages.module.scss';
 
 import { CALENDAR_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE } from '../utils/consts';
 
@@ -47,47 +47,46 @@ const Auth = observer(() => {
   }
 
   return (
-    <div className='page page__auth'>
-      <div className="form__auth">
+    <div className={styles.page}>
+      <div className={styles.page_info}>
 
-        <div>
-          <label>
-            {isLogin ? 'прошу, ваш логин' : 'прошу, задайте логин'}
-          </label>
-          <input required={true} placeholder='email' type="text" value={email} name="email" id="email"
-            onChange={e => setEmail(e.target.value)}
-          />
 
-          <label>
-            {isLogin ? 'прошу, ваш пароль' : 'прошу, придумайте пароль'}
-          </label>
-          <input required={true} type="text" name="password" value={password} id="password"
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
+        <p className={styles.label}>
+          {isLogin ? 'прошу, ваш логин' : 'прошу, задайте логин'}
+        </p>
 
-        <div className='form__auth--links'>
+        <input className={styles.input} required={true} placeholder='email' type="text" value={email} name="email" id="email"
+          onChange={e => setEmail(e.target.value)}
+        />
 
-          <label>
-            {isLogin ? 'новенький?' : 'старенький?'}
-          </label>
+        <p className={styles.label}>
+          {isLogin ? 'прошу, ваш пароль' : 'прошу, придумайте пароль'}
+        </p>
 
-          <Link className='form__auth-link'
-            to={isLogin ? SIGNUP_ROUTE : LOGIN_ROUTE}>
-            {isLogin ? 'создай аккаунт' : 'авторизуйся'}
-          </Link>
+        <input className={styles.input} required={true} type="text" name="password" value={password} id="password"
+          onChange={e => setPassword(e.target.value)}
+        />
 
-        </div>
+        <p className={styles.label}>
+          {isLogin ? 'новенький?' : 'старенький?'}
+        </p>
 
-        <button className='form__auth--submit-btn'
+        <Link
+          to={isLogin ? SIGNUP_ROUTE : LOGIN_ROUTE}>
+          {isLogin ? 'создай аккаунт' : 'авторизуйся'}
+        </Link>
+
+        <button className={styles.submit_btn}
           onClick={() => auth(email, password, userRole)}>
           {isLogin ? 'войти' : 'создать профиль'}
         </button>
 
-        <p style={{ color: 'grey' }}>[роль по-умолчанию: клиент]</p>
+        <p className={styles.label}>
+          [роль по-умолчанию: клиент]
+        </p>
 
       </div>
-    </div>
+    </div >
   )
 })
 

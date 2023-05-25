@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CALENDAR_ROUTE } from '../../../utils/consts'
-import styles from './columns.module.css'
+import styles from './_columns.module.scss'
 import logo from "./logo.svg"
 
 const Columns = () => {
   return (
-    <div className={styles.columns_box}>
+    <div className={styles.columns}>
       <div className={styles.column} />
       <div className={styles.column} />
       <div className={styles.column} />

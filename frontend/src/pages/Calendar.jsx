@@ -1,7 +1,6 @@
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 
-import '../components/calendar.css';
 import { PROFILE_ROUTE } from '../utils/consts';
 
 import { useNavigate } from 'react-router-dom';
@@ -11,34 +10,42 @@ import { observer } from 'mobx-react-lite';
 import { fetchAppoints, createAppoint } from '../http/appointAPI';
 import { fetchUsers } from '../http/userAPI'
 
+import styles from './_pages.module.scss'
+
 import Cards from '../components/cards/Cards'
 
-import styles from '../components/common-styles.module.css'
 
 const Calendar = observer(() => {
+
+  console.log('render calendar')
 
   const navigate = useNavigate();
 
   const { appoint, user } = useContext(Context)
 
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
+  // const [date, setDate] = useState('')
+  // const [time, setTime] = useState('')
 
-  let currUser
-  let masters
+
+  // let masters
+
+  let currUser = useMemo(() => {
+
+
+  }, [])
+
+  useEffect(() => {
+    fetchUsers().then(data => user.setUsers(data))
+  }, [user])
+
+
 
   if (user.isAuth) {
     currUser = user.users.filter(u => u.id === user.user.id)[0]
   } else {
+
     currUser = { id: 0, email: null }
   }
-
-  useEffect(() => {
-
-    fetchAppoints().then(data => appoint.setAppoints(data))
-    fetchUsers().then(data => user.setUsers(data))
-
-  }, [])
 
   const click = async (e) => {
 
@@ -65,46 +72,14 @@ const Calendar = observer(() => {
 
 
   return (
+
     <div className={styles.page}>
-
-
-      <Cards user={user} currUser={currUser} />
-
-
-
-      {/* 
-      <form required={true} className="calendar-info__form"
-        onSubmit={e => e.preventDefault()}
-        name='get'
-      >
-
-        <p>запланируйте подходящее вам время</p>
-
-        <input
-          required={true}
-          onChange={e => setDate(e.target.value)}
-          type="date" value={date}
-        />
-
-        <input
-          required={true}
-          onChange={e => setTime(e.target.value)}
-          type="time" value={time}
-        />
-
-
-
-
-
-
-        <button onClick={click}>записаться</button>
-
-      </form> */}
-
-
+      <div className={styles.page_info}>
+        <Cards user={user} currUser={currUser} className={styles.cards} />
+      </div>
     </div>
 
   );
 
 })
-export default Calendar
+export default React.memo(Calendar)

@@ -7,7 +7,7 @@ import React, {
   useState
 } from 'react';
 
-import './pages.css';
+import styles from './_pages.module.scss';
 
 import { Context } from '../index';
 
@@ -37,17 +37,16 @@ const Profile = () => {
   console.log('profile')
 
   return (
-    <div className='page page__profile'>
+    <div className={styles.page}>
 
 
-      <div className="calendar-info__form">
+      <div className={styles.page_info}>
         <p>
-          {'добро пожаловать, ' + currUser.email}
+          добро пожаловать, {currUser.email}
         </p>
 
-        <div className='appoint__list'>
-          <Appoints currUser={currUser} fetchMemoStatuses={fetchMemoStatuses} />
-        </div>
+        <Appoints currUser={currUser} fetchMemoStatuses={fetchMemoStatuses} />
+
       </div>
     </div>
   )

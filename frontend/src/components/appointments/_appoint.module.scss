@@ -1,0 +1,69 @@
+.appoint_group {
+  margin: 0.5rem;
+}
+
+.appoint {
+  margin: 1rem;
+  height: 5rem;
+  min-width: min-content;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(180, 180, 180, 0.5) 0%, rgba(153, 153, 153, 1) 26%, rgba(31, 31, 31, 0.5));
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.2s;
+  &:hover {
+    width: fit-content;
+    justify-content: end;
+  }
+}
+
+.statuses {
+  background: #dbdbdb;
+  border: none;
+  height: 3rem;
+  width: fit-content;
+}
+
+.name {
+  color: black;
+  margin: 0 2rem;
+  height: 3rem;
+}
+
+input {
+  height: 3rem;
+  border: none;
+  border-right: 0.2rem solid #9d6363;
+  background: #dbdbdb;
+  width: 12rem;
+  border-radius: 0;
+
+  font-weight: 700;
+
+  padding: 0 1rem;
+}
+
+.delete_btn {
+  height: 3rem;
+  border: none;
+  background: #dbdbdb;
+  width: 2rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #9d6363;
+    width: 11rem;
+    transform: scaleX(-3rem);
+
+    &::after {
+      content: " отмена сеанса";
+      font-size: 1rem;
+    }
+  }
+}
