@@ -10,7 +10,7 @@ const generateJwt = (id, email, userRoleId) => {
 
     { id, email, userRoleId },
     process.env.SECRET_KEY,
-    { expiresIn: '24h' }
+    { expiresIn: '48h' }
 
   )
 
@@ -100,10 +100,11 @@ class UserController {
   }
 
   async updateUser(req, res) {
-    const { id } = req.params.id
+
+    const { id } = req.params
     const user = req.body
     const updUser = await User.update(user, { where: { id } })
-
+    console.log(id + ' ' + user)
     return res.json(updUser)
 
   }

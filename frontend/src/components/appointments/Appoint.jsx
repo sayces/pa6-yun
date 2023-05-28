@@ -7,7 +7,7 @@ import { deleteAppoints, editAppoint, fetchAppoints, fetchStatuses } from '../..
 import styles from './_appoint.module.scss'
 import Select from '../ui/Select'
 
-const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser }) => {
+const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser, onUpdate }) => {
 
   console.log('render appoint')
 
@@ -16,6 +16,15 @@ const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser }) => {
   let clientEmail = user.users.filter(cn => currAppoint.client === cn.id)[0].email
   let masterEmail = user.users.filter(cn => currAppoint.master === cn.id)[0].email
 
+  let email;
+  if (currUser.userRoleId === 1) {
+    email = clientEmail + ' -ваш мастер'
+  } else if (currUser.userRoleId === 2) {
+    email = masterEmail + ' -ваш клиент'
+  } else {
+    email = clientEmail + ' записан к ' + masterEmail
+  }
+
   useEffect(() => {
     fetchAppoints().then(data => appoint.setAppoints(data))
   }, [fetchMemoAppoints, currAppoint.appointStatusId])
@@ -23,10 +32,15 @@ const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser }) => {
   const deleteAppoint = async () => {
 
     try {
-      deleteAppoints({ id: currAppoint.id })
+      deleteAppoints({ id: currAppoint.id });
     } catch (e) {
       console.log(e)
     }
+
+
+
+
+
   }
 
   const updateAppoint = async (statusId) => {
@@ -38,7 +52,8 @@ const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser }) => {
           id: currAppoint.id,
           appointStatusId: statusId,
         }
-      )
+      );
+
     } catch (e) {
       console.log(e)
     }
@@ -50,10 +65,9 @@ const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser }) => {
         {
           id: currAppoint.id,
           appointStatusId: 3,
-
         }
 
-      )
+      );
 
     } catch (e) {
       console.log(e)
@@ -66,10 +80,10 @@ const Appoint = observer(({ currAppoint, fetchMemoAppoints, currUser }) => {
 
     <div className={styles.appoint} >
 
-      <p className={styles.name}>{currUser.id === 1 ? `${clientEmail} ~ваш клиент ` : `${masterEmail} ~ваш мастер`}</p>
+      <p className={styles.name}>{email}</p>
 
       <>
-        <input id={currAppoint.id} placeholder={currAppoint.date} value={currAppoint.date} type='date' readOnly={true} />
+        <input id={currAppoint.id} placeholder={currAppoint.date} value={currAppoint.date} type='date' readOnly={true} className={styles.update_input} />
 
         <input id={currAppoint.id} placeholder={currAppoint.time} value={currAppoint.time} type='time' readOnly={true} />
 

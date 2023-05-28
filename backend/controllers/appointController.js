@@ -1,5 +1,5 @@
 
-const { Appointment, AppointmentStatus, User } = require('../models/models')
+const { Appointment, AppointmentStatus, User, Service } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class AppointController {
@@ -32,18 +32,23 @@ class AppointController {
         {
           model: AppointmentStatus
         },
-        {
-          model: AppointmentStatus
-        },
       ]
     })
     return res.json(statuses)
   }
 
+  async appoint_service(req, res) {
+
+    const service = await Service.findAll({
+
+    })
+    return res.json(service)
+  }
+
   async appoint(req, res) {
 
-    const { client, master, date, time, appointStatusId } = req.body
-    const appoint = await Appointment.create({ client, master, date, time, appointStatusId })
+    const { client, master, date, time, appointStatusId, serviceId } = req.body
+    const appoint = await Appointment.create({ client, master, date, time, appointStatusId, serviceId })
     return res.json(appoint)
   }
 
@@ -55,16 +60,7 @@ class AppointController {
         res.status(400).json({ message: 'no id' })
       }
       const appoint = await Appointment.findOne({
-        where: { id },
-        include: [
-          {
-            model: User
-          },
-          {
-            model: AppointmentStatus
-          },
-        ]
-
+        where: { id }
       })
       return res.json(appoint)
     } catch (e) {

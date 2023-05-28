@@ -3,11 +3,11 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('appoint_status', [
+    return await queryInterface.bulkInsert('appoint_status', [
 
       {
         id: 1,
-        status: "запись в ожидании клиента"
+        status: "окно создано"
 
       },
       {
@@ -21,12 +21,20 @@ module.exports = {
       {
         id: 4,
         status: "запись перенесена"
+      },
+      {
+        id: 5,
+        status: "завершено успешно"
+      },
+      {
+        id: 6,
+        status: "завершено некорректно"
       }
 
     ])
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('appoint_status', null);
+    return await queryInterface.bulkDelete('appoint_status', null);
   }
 };

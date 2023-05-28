@@ -16,7 +16,7 @@ const Select = observer(({ object, currObject, onUpdate, currUser }) => {
 
     <>
       <select className={styles.select}
-        disabled={(currUser.userRoleId) == 2 ? 'true' : 'false'}
+        disabled={currUser.userRoleId === 3 ? false : true}
         name='update'
         onChange={(e) => onUpdate(e.target.value)}
         defaultValue={currObject.appointStatusId}

@@ -55,20 +55,32 @@ const CalendarAppoints = observer(({ thatAppoint, index, currUser }) => {
 
   return (
     <>
-      <div key={thatAppoint.id} className={styles.appoint_card}>
+      <div key={thatAppoint.id} className={styles.appoint_card}
+        style={thatAppoint.appointStatusId === 1 ? {} : { background: '#9d6363' }}
+      >
         <p>
           [ {index + 1} ] окно на {thatAppoint.time}
         </p>
 
         <button
 
+          disabled=
+          {
+            thatAppoint.appointStatusId === 1 && currUser.userRoleId !== 3
+              ?
+              false
+              :
+              true
+          }
+
+
           style=
           {
-            appointBtn
+            appointBtn && thatAppoint.appointStatusId === 1
               ?
-              { background: '#d5f0c1', transition: 'all 0.3s' }
+              { background: '#d5f0c1' }
               :
-              { background: '#db9c77', transition: 'all 0.3s' }
+              { borderRadius: '0.1rem 0.6rem' }
           }
 
           onClick=
@@ -82,10 +94,11 @@ const CalendarAppoints = observer(({ thatAppoint, index, currUser }) => {
 
           className={styles.galochka}>
 
-          {appointBtn ? 'галочка' : 'крестик'}
+
+          {appointBtn && thatAppoint.appointStatusId === 1 ? 'галочка' : 'крестик'}
 
         </button>
-      </div>
+      </div >
 
     </>
   )

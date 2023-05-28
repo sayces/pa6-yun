@@ -1,17 +1,39 @@
 .appoint_group {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.group_active {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  justify-content: center;
+  align-items: center;
   margin: 0.5rem;
+  transform-origin: bottom;
+}
+
+.group_inactive {
+  display: flex;
+  flex-direction: column;
+  transform: scale(0);
+  transform-origin: top;
+  height: 0;
+  transition: all 0.2s ease;
+  margin: 1rem;
 }
 
 .appoint {
   margin: 1rem;
   height: 5rem;
-  min-width: min-content;
+  width: fit-content;
   border-radius: 0.6rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, rgba(180, 180, 180, 0.5) 0%, rgba(153, 153, 153, 1) 26%, rgba(31, 31, 31, 0.5));
+  background: linear-gradient(180deg, rgba(61, 61, 61, 0.8) 0%, rgba(153, 153, 153, 1) 26%, rgba(31, 31, 31, 0.8));
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -31,9 +53,10 @@
 }
 
 .name {
-  color: black;
+  color: rgb(32, 18, 18);
   margin: 0 2rem;
   height: 3rem;
+  width: 18rem;
 }
 
 input {
@@ -49,6 +72,96 @@ input {
   padding: 0 1rem;
 }
 
+.option_btn {
+  height: 3rem;
+  border: 0.2rem solid #8b8b8b;
+  background: #dbdbdb;
+  width: auto;
+  border-radius: 0;
+  font-weight: 700;
+  padding: 0 1rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #8b8b8b;
+
+    border-radius: 6px;
+  }
+  &:focus {
+    background: #b7b7b7;
+  }
+}
+
+.option_btn_active {
+  height: 3rem;
+  border: 0.2rem solid #dbdbdb;
+  background: #b7b7b7;
+  width: auto;
+  border-radius: 0;
+  font-weight: 700;
+  padding: 0 1rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #8b8b8b;
+
+    border-radius: 6px;
+  }
+  &:focus {
+    background: #8b8b8b;
+  }
+}
+
+.update_input {
+  height: 3rem;
+  border: none;
+  border-right: 0.2rem solid #9d6363;
+  background: #dbdbdb;
+  width: 14rem;
+  border-radius: 0;
+  font-weight: 700;
+  padding: 0 1rem;
+}
+
+.upgrade_btn {
+  height: 3rem;
+  border: 0.4rem solid #93bb89;
+  background: #dbdbdb;
+  width: auto;
+  border-radius: 0;
+  font-weight: 700;
+  padding: 0 1rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #b7b7b7;
+
+    border-radius: 6px 0 0 6px;
+  }
+  &:focus {
+    background: #8b8b8b;
+  }
+}
+
+.degrade_btn {
+  height: 3rem;
+  border: 0.4rem solid #72372f;
+  background: #dbdbdb;
+  width: auto;
+  border-radius: 0;
+  font-weight: 700;
+  padding: 0 1rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #b7b7b7;
+    border-radius: 0 6px 6px 0;
+  }
+  &:focus {
+    background: #8b8b8b;
+  }
+}
+
 .delete_btn {
   height: 3rem;
   border: none;
@@ -58,12 +171,80 @@ input {
 
   &:hover {
     background: #9d6363;
-    width: 11rem;
+    width: 3rem;
     transform: scaleX(-3rem);
 
     &::after {
-      content: " отмена сеанса";
       font-size: 1rem;
     }
   }
+}
+
+.admin_panel {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease;
+
+  .admin_search {
+    width: 10rem;
+    height: 3rem;
+    padding: 0 1rem;
+    border: none;
+    transition: 0.2s ease;
+    background: #8b8b8b;
+    &:hover {
+      border-radius: 0 0.6rem 0.6rem 0;
+      width: 20rem;
+      background: #b7b7b7;
+    }
+    &:focus {
+      border-radius: 0 0.6rem 0.6rem 0;
+      width: 25rem;
+      background: #fff;
+      min-width: fit-content;
+    }
+  }
+
+  .admin_btn {
+    width: 10rem;
+    height: 3rem;
+
+    padding: 0 1rem;
+    border: none;
+    border-right: 0.2rem solid #ffffff;
+    background: #8b8b8b;
+    transition: 0.2s ease;
+    &:hover {
+      background: #b7b7b7;
+    }
+  }
+}
+
+.user_profile_card {
+  margin: 1rem;
+  padding: 0.5rem 2rem;
+  background: linear-gradient(180deg, rgba(61, 61, 61, 0.8) 0%, rgba(153, 153, 153, 1) 26%, rgba(31, 31, 31, 0.8));
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.2s;
+  min-width: auto;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  transition: all 0.2s ease;
+}
+
+.user_profile_info {
+  margin: auto 1rem;
+}
+
+.p {
+  color: #ffffff;
 }

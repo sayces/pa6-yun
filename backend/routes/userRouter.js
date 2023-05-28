@@ -12,7 +12,7 @@ router.get('/auth', authMiddleware, userController.auth)
 
 router.get('/users', userController.getAllUsers)
 router.get('/user/:id', userController.getOneUser)
-router.put('/user/:id', userController.updateUser)
+router.put('/update/:id', userController.updateUser)
 router.get('/roles', roleController.getAllRoles)
 
 module.exports = router

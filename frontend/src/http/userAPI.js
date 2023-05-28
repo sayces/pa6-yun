@@ -36,6 +36,14 @@ export const fetchRoles = async () => {
   return data
 }
 
+export const editUser = async ({ id, userRoleId, name }) => {
+  console.log('edit ' + id + ' ' + userRoleId + 'name')
+
+  const { data } = await $authHost.put('api/user/update/' + id, { userRoleId, name })
+  return data
+
+}
+
 
 
 

@@ -1,3 +1,4 @@
+
 const sequelize = require('../db')
 const { DataTypes } = require('sequelize')
 
@@ -6,12 +7,14 @@ const { DataTypes } = require('sequelize')
 const User = sequelize.define('user', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
-  password: { type: DataTypes.STRING, allowNull: false },
+  password: { type: DataTypes.STRING, allowNull: true },
   name: { type: DataTypes.STRING, allowNull: true }
 },
   {
     timestamps: false,
     freezeTableName: true,
+
+
 
   })
 
@@ -19,13 +22,31 @@ const Appointment = sequelize.define('appointment', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, },
   date: { type: DataTypes.DATEONLY, unique: false, allowNull: false, },
   time: { type: DataTypes.TIME, unique: false, allowNull: false, },
+
 },
   {
-    updatedAt: false,
+    updatedAt: true,
     createdAt: true,
     freezeTableName: true,
 
+
+
   })
+
+const Service = sequelize.define('service', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, },
+  service: { type: DataTypes.STRING, allowNull: false, unique: true },
+  description: { type: DataTypes.STRING, allowNull: false },
+},
+  {
+    updatedAt: false,
+    createdAt: false,
+    freezeTableName: true,
+
+
+  })
+
+
 
 
 const UserRole = sequelize.define('user_role', {
@@ -35,6 +56,8 @@ const UserRole = sequelize.define('user_role', {
   {
     timestamps: false,
     freezeTableName: true,
+
+
 
   })
 
@@ -46,16 +69,18 @@ const AppointmentStatus = sequelize.define('appoint_status', {
     timestamps: false,
     freezeTableName: true,
 
+
+
   })
 
 const UserReputation = sequelize.define('user_reputation', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-
-  // reputation: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0, },
+  reputation: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0, },
 },
   {
     timestamps: false,
     freezeTableName: true,
+
 
   })
 
@@ -69,12 +94,15 @@ const GalleryPost = sequelize.define('gallery_post', {
     timestamps: false,
     freezeTableName: true,
 
+
+
   })
 
 // Связи
 
-User.hasMany(Appointment, { foreignKey: 'master', onDelete: "CASCADE", onUpdate: "CASCADE" })
-Appointment.belongsTo(User, { foreignKey: 'client' })
+User.hasMany(Appointment)
+Appointment.belongsTo(User, { foreignKey: { name: 'master' } },)
+Appointment.belongsTo(User, { foreignKey: { name: 'client' } })
 
 User.hasMany(UserReputation)
 UserReputation.belongsTo(User)
@@ -82,13 +110,14 @@ UserReputation.belongsTo(User)
 User.hasMany(GalleryPost)
 GalleryPost.belongsTo(User)
 
-AppointmentStatus.hasMany(Appointment,)
+AppointmentStatus.hasMany(Appointment)
 Appointment.belongsTo(AppointmentStatus)
 
 UserRole.hasMany(User)
 User.belongsTo(UserRole)
 
-
+Service.hasMany(Appointment)
+Appointment.belongsTo(Service)
 
 
 
@@ -98,5 +127,6 @@ module.exports = {
   UserRole,
   Appointment,
   AppointmentStatus,
-  GalleryPost
+  GalleryPost,
+  Service
 }

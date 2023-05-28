@@ -12,6 +12,9 @@ import { formatDate } from 'react-calendar/dist/cjs/shared/dateFormatter';
 
 import CalendarAppoints from './CalendarAppoints';
 
+import classNames from 'classnames'
+import { createAppoint, fetchAppoints } from '../../../http/appointAPI';
+
 
 const UserCard = observer(({ master, appoint, currUser }) => {
 
@@ -22,20 +25,23 @@ const UserCard = observer(({ master, appoint, currUser }) => {
   let currentDate = new Date();
   currentDate.setTime(currentDate.getTime() - dayMilliseconds);
 
-  const [cardOpened, setCardOpened] = useState(false)
-
   const [date, set_Date] = useState()
-  console.log('render card', date)
-  const [activeBtn, setActiveBtn] = useState(true)
-  console.log(activeBtn)
+  console.log(date)
+  const [activeCardBtn, setActiveCardBtn] = useState(false)
+  const [activeCreateBtn, setActiveCreateBtn] = useState(false)
+  const [time, setTime] = useState('00:00')
+  const thatDate = appoint.appoints.filter(d => d.date === date && master.id === d.master)
 
-  const thatDate = appoint.appoints.filter(d => d.date === date && d.appointStatusId === 1 && master.id === d.master)
-
-  console.log(thatDate)
+  let datesLabel;
+  if (thatDate.length > 0) {
+    datesLabel = 'свободные окна: '
+  } else {
+    datesLabel = 'мастер отдыхает в этот день..'
+  }
 
   useEffect(() => {
-
-  }, [date])
+    fetchAppoints().then(data => appoint.setAppoints(data))
+  }, [activeCreateBtn])
 
   const formatter = (value) => {
 
@@ -48,9 +54,31 @@ const UserCard = observer(({ master, appoint, currUser }) => {
 
   }
 
-  const setButton = () => {
-    setActiveBtn(!activeBtn)
+  const Appoint = () => {
+    try {
+
+      if (activeCreateBtn && time !== "00:00") {
+        createAppoint({
+          date: date,
+          time: time,
+          client: currUser.id,
+          master: master.id,
+          appointStatusId: 1,
+          serviceId: 1
+        })
+
+      }
+
+      setActiveCreateBtn(!activeCreateBtn)
+      setTime('00:00')
+
+    } catch (e) {
+      console.log(e)
+    }
+
   }
+
+
 
   const tileClass = ({ view }) => {
     if (view == 'month') return 'day'
@@ -62,22 +90,22 @@ const UserCard = observer(({ master, appoint, currUser }) => {
 
       <button
         className={styles.button}
-        onClick={setButton}
-        style={activeBtn ? { translate: '10rem', transition: 'all 0.2s ease-out' } : { transition: 'all 0.2s ease-out' }}
+        onClick={() => setActiveCardBtn(!activeCardBtn)}
+        style={activeCardBtn ? {} : {}}
       >
         @{master.email}
       </button>
 
       <div
-        style={activeBtn ? { transform: 'scale(0)', transformOrigin: 'right top', display: 'flex', flexDirection: 'column', alignItems: 'end', transition: 'all 0.2s ease-out', height: '0' } : { transform: 'scale(1)', transformOrigin: 'top', display: 'flex', flexDirection: 'column', transition: 'all 0.2s ease-out', height: 'max-content' }}
+        className={classNames(styles.card_active, activeCardBtn ? styles.card_opened : styles.card_closed)}
       >
 
 
         <Calendar
           value={date}
-          // onClickDay={}
+          onClickDay={value => formatter(value)}
 
-          onChange={value => formatter(value)}
+          // onChange={}
           minDate={currentDate}
           tileClassName={tileClass}
           minDetail='month'
@@ -85,23 +113,47 @@ const UserCard = observer(({ master, appoint, currUser }) => {
         />
 
 
-        <p>
-          {
-            thatDate.length > 0
-              ?
-              `окна на ${date.slice(8)}е число:`
-              :
-              `мастер тотали занят в этот день`
-          }
-        </p>
 
+        <p>
+          {datesLabel}
+        </p>
+        {
+          (currUser.userRoleId === 3)
+            ?
+            <div className={styles.create_form_container}>
+
+              <div className={classNames(styles.create_form, activeCreateBtn ? styles.create_active : styles.create_form_inactive)}>
+
+                <p>[ * ]</p>
+
+                <input className={styles.create_input} type="time"
+                  value={time}
+                  onChange={e => setTime(e.target.value)} />
+              </div>
+
+              <button className={classNames(styles.button,
+                activeCreateBtn
+                  ?
+                  styles.create_button_active
+                  :
+                  styles.create_button
+              )}
+                onClick={Appoint}>
+                добавить окно
+              </button>
+
+            </div>
+            :
+            null
+        }
         {
           thatDate.map(a =>
             <CalendarAppoints index={thatDate.indexOf(a)} thatAppoint={a} key={a.id} currUser={currUser} />
           )
         }
+
       </div >
-    </div>
+    </div >
   )
 })
 

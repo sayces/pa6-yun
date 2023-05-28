@@ -10,6 +10,12 @@ export const fetchAppoints = async () => {
   return data
 }
 
+export const service = async () => {
+
+  const { data } = await $host.get('api/calendar/appoint-service')
+  return data
+}
+
 export const fetchAppointStatus = async () => {
 
   const { data } = await $host.get('api/calendar/appoint-status')
@@ -30,9 +36,9 @@ export const exactAppoint = async ({ id }) => {
 
 
 
-export const createAppoint = async ({ date, time, appointStatusId, client, master }) => {
+export const createAppoint = async ({ date, time, appointStatusId, client, master, serviceId }) => {
 
-  const { data } = await $authHost.post('api/calendar/get', { date, time, appointStatusId, client, master })
+  const { data } = await $authHost.post('api/calendar/get', { date, time, appointStatusId, client, master, serviceId })
   return data
 
 }

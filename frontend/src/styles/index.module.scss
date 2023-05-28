@@ -81,12 +81,26 @@ h1 {
 
 a {
   font-size: 1.5 * $rem;
+  color: #aa2525;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 p {
   font-size: 1.5 * $rem;
+  color: aliceblue;
 }
 
 button {
   font-size: 1.5 * $rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input {
+  color: rgb(153, 153, 153);
+
+  font-size: 1.5rem;
 }
