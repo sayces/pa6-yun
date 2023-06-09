@@ -11,8 +11,10 @@ import { authRoutes, publicRoutes } from '../routes';
 
 const AppRouter = ({ user }) => {
   console.log('render router')
-  const authCheck = user.isAuth
 
+  let authCheck
+
+  authCheck = user.isAuth
 
 
   return (
@@ -28,4 +30,4 @@ const AppRouter = ({ user }) => {
   )
 };
 
-export default AppRouter;
+export default React.memo(AppRouter);

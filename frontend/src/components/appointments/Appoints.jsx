@@ -88,7 +88,7 @@ const Appoints = observer(({ currUser, fetchMemoStatuses, date }) => {
             {appoint.appoints.filter(a => {
               if (_search == '') {
                 return a
-              } else if (a.date.toLowerCase().includes(_search.toLowerCase()) || a.time.toLowerCase().includes(_search.toLowerCase())) {
+              } else if (a.date.toLowerCase().includes(_search.toLowerCase())) {
                 return a
               }
             }).map((a) =>
@@ -116,11 +116,11 @@ const Appoints = observer(({ currUser, fetchMemoStatuses, date }) => {
             {user.users.filter(u => {
               if (_search == '')
                 return u
-              else if (u.email.toLowerCase().includes(_search.toLowerCase()) || u.name.toLowerCase().includes(_search.toLowerCase()))
+              else if (u.email.toLowerCase().includes(_search.toLowerCase()))
                 return u
             }).map(u =>
               <UserProfileCard
-                user={u}
+                thatUser={u}
 
                 upgradeUser={addMaster}
                 degradeUser={removeMaster}

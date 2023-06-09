@@ -12,18 +12,17 @@ import { auth, fetchUsers, fetchRoles } from './http/userAPI';
 import { Context } from './index';
 
 
-const App = () => {
-  console.log('render app')
+const App = observer(() => {
+
   const { user } = useContext(Context);
 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchUsers().then(data => user.setUsers(data))
-    fetchRoles().then(data => user.setRoles(data))
 
     try {
-
+      fetchUsers().then(data => user.setUsers(data))
+      fetchRoles().then(data => user.setRoles(data))
       auth().then(data => {
         user.setUser(data)
         user.setIsAuth(true)
@@ -32,7 +31,7 @@ const App = () => {
     } catch (e) {
       console.log(e)
     }
-  }, [user.users])
+  }, [])
 
   if (loading) {
     return <h1>LOADING</h1>
@@ -50,6 +49,6 @@ const App = () => {
     </div>
 
   )
-};
+});
 
 export default App;

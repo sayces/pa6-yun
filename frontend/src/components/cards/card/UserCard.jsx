@@ -26,10 +26,11 @@ const UserCard = observer(({ master, appoint, currUser }) => {
   currentDate.setTime(currentDate.getTime() - dayMilliseconds);
 
   const [date, set_Date] = useState()
-  console.log(date)
+
   const [activeCardBtn, setActiveCardBtn] = useState(false)
   const [activeCreateBtn, setActiveCreateBtn] = useState(false)
   const [time, setTime] = useState('00:00')
+
   const thatDate = appoint.appoints.filter(d => d.date === date && master.id === d.master)
 
   let datesLabel;
@@ -78,8 +79,6 @@ const UserCard = observer(({ master, appoint, currUser }) => {
 
   }
 
-
-
   const tileClass = ({ view }) => {
     if (view == 'month') return 'day'
   }
@@ -104,8 +103,6 @@ const UserCard = observer(({ master, appoint, currUser }) => {
         <Calendar
           value={date}
           onClickDay={value => formatter(value)}
-
-          // onChange={}
           minDate={currentDate}
           tileClassName={tileClass}
           minDetail='month'

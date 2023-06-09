@@ -23,20 +23,11 @@ const Calendar = observer(() => {
 
   const { appoint, user } = useContext(Context)
 
-  // const [date, setDate] = useState('')
-  // const [time, setTime] = useState('')
-
-
-  // let masters
-
-  let currUser = useMemo(() => {
-
-
-  }, [])
+  let currUser
 
   useEffect(() => {
     fetchUsers().then(data => user.setUsers(data))
-  }, [user])
+  }, [])
 
 
 

@@ -1,18 +1,29 @@
-import React from 'react'
+
+import React, { useContext, useEffect } from 'react'
 import styles from './_appoint.module.scss'
-import { editUser } from '../../http/userAPI'
-const UserProfileCard = ({ user, upgradeUser, degradeUser, activeAddMasterBtn }) => {
 
+import { Context } from '../../index'
+import { observer } from 'mobx-react-lite';
+import { fetchUsers } from '../../http/userAPI';
 
+const UserProfileCard = observer(({ thatUser, upgradeUser, degradeUser, activeAddMasterBtn }) => {
+
+  const { user } = useContext(Context);
+
+  useEffect(() => {
+    fetchUsers().then(data => user.setUsers(data))
+  }, [activeAddMasterBtn])
+
+  let userRole = user.roles.filter(r => r.id === thatUser.userRoleId)[0];
 
   return (
 
     <div className={styles.user_profile_card}>
       <div className={styles.user_profile_info}>
 
-        <p >логин @{user.email}<br />
-          имя: {user.name ? user.name : 'не утверждено'}<br />
-          роль: {user.userRoleId}</p>
+        <p >логин @{thatUser.email}<br />
+          имя: {thatUser.name ? thatUser.name : 'не утверждено'}<br />
+          роль: {userRole.role}</p>
       </div>
 
       {
@@ -20,13 +31,13 @@ const UserProfileCard = ({ user, upgradeUser, degradeUser, activeAddMasterBtn })
           ?
           <div className={styles.user_profile_info}>
             <button
-              onClick={(userId) => upgradeUser(user.id)}
+              onClick={() => upgradeUser(thatUser.id)}
               className={styles.upgrade_btn}
             >
               &uarr;
             </button>
             <button
-              onClick={(userId) => degradeUser(user.id)}
+              onClick={() => degradeUser(thatUser.id)}
               className={styles.degrade_btn}
             >
               &darr;
@@ -40,6 +51,6 @@ const UserProfileCard = ({ user, upgradeUser, degradeUser, activeAddMasterBtn })
     </div >
 
   )
-}
+})
 
-export default UserProfileCard
+export default React.memo(UserProfileCard)
